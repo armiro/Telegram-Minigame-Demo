@@ -2,7 +2,7 @@ from pymongo import MongoClient
 # from urllib.parse import quote_plus
 
 
-USR = 'new-user_31'
+USR = 'test-admin'
 PWD = 'Aa_13741374'
 CLUSTER_NAME = 'testcluster'
 APP_NAME = 'TestCluster'
@@ -14,7 +14,11 @@ client = MongoClient(uri)
 
 try:
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
+    print("Pinged deployment. Successfully connected to MongoDB!")
+    print('creating database...')
+    db = client['test_db']
+    users_collection = db['users']
+    print(f'database "{db.name}" created!')
 except Exception as e:
     print(e)
 
