@@ -9,17 +9,17 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 BOT_TOKEN = '7251575252:AAEbeZo1rNLmE8zInZSnbtr66S5WPPSOLvI'
-APP_LINK = 'https://t.me/mustchio_bot/hoskinson'
+APP_LINK = 'https://t.me/mustachio_bot/hoskinson'
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    # guid = update.effective_user.id
-    # user = users_collection.find_one({'guid': guid})
-    # if not user:
-    #     users_collection.insert_one({'guid': guid, 'balance': 0})
+    guid = update.effective_user.id
+    user = users_collection.find_one({'guid': guid})
+    if not user:
+        users_collection.insert_one({'guid': guid, 'balance': 0})
 
-    welcome_msg = "Welcome to the mini-game crypto bot! Tap on funny Donald Trump to earn $DJT token!"
-    game_link_msg = f"<a href={APP_LINK}>Tap to open the game!</a>"
+    welcome_msg = "Welcome to the mini-game crypto bot! Tap on funny Donald Trump to earn $DJT tokens!"
+    game_link_msg = f"<a href=\"{APP_LINK}\">Tap to open the game!</a>"
     await update.message.reply_text(welcome_msg, parse_mode='HTML')
     await update.message.reply_text(game_link_msg, parse_mode='HTML', disable_web_page_preview=False)
 
