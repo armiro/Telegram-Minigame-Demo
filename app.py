@@ -1,16 +1,18 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from mongodb_connection import users_collection
 
 
 app = Flask(__name__)
+CORS(app)  # enable cross-origin resource sharing
 
 
 @app.route('/tap', methods=['POST'])
 def tap():
     user_id = request.form['guid']
+    new_balance = int(request.form['balance'])
     user = users_collection.find_one({'guid': user_id})
     if user:
-        new_balance = user['balance'] + 1
         users_collection.update_one({'guid': user_id}, {'$set': {'balance': new_balance}})
         return jsonify({})
     else:
@@ -20,7 +22,7 @@ def tap():
 @app.route('/get_balance', methods=['GET'])
 def get_balance():
     user_id = request.args.get('guid')
-    print(user_id)
+    print('user id is:', user_id)
     user = users_collection.find_one({'guid': user_id})
     if user:
         return jsonify({'balance': user['balance']})
@@ -30,4 +32,4 @@ def get_balance():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
