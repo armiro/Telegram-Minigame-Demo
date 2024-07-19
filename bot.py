@@ -1,14 +1,16 @@
-import logging
-from telegram.ext import Application, CommandHandler, ContextTypes, Updater
-from telegram import Update
+import logging, os
+from dotenv import load_dotenv
+from telegram.ext import Application, CommandHandler, ContextTypes
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from pymongo import MongoClient
 from mongodb_connection import users_collection
 
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+load_dotenv('./variables.env')
 
-BOT_TOKEN = '7251575252:AAEbeZo1rNLmE8zInZSnbtr66S5WPPSOLvI'
+BOT_TOKEN = os.getenv(key='BOT_TOKEN')
 APP_LINK = 'https://t.me/mustachio_bot/hoskinson'
 
 
@@ -19,9 +21,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         users_collection.insert_one({'guid': guid, 'balance': 0})
 
     welcome_msg = "Welcome to the mini-game crypto bot! Tap on funny Donald Trump to earn $DJT tokens!"
-    game_link_msg = f"<a href=\"{APP_LINK}\">Tap to open the game!</a>"
-    await update.message.reply_text(welcome_msg, parse_mode='HTML')
-    await update.message.reply_text(game_link_msg, parse_mode='HTML', disable_web_page_preview=False)
+    keyboard = [[InlineKeyboardButton(text='Launch the Game!', web_app=WebAppInfo(url=APP_LINK))]]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await update.message.reply_text(welcome_msg, reply_markup=reply_markup, parse_mode='HTML')
+
+    # game_link_msg = f"<a href=\"{APP_LINK}\">Tap to open the game!</a>"
+    # await update.message.reply_text(game_link_msg, parse_mode='HTML', disable_web_page_preview=False)
 
 
 def main() -> None:
