@@ -1,9 +1,13 @@
+import os
+from dotenv import load_dotenv
 from pymongo import MongoClient
 # from urllib.parse import quote_plus
 
 
-USR = 'test-admin'
-PWD = 'Aa_13741374'
+load_dotenv('./variables.env')
+
+USR = os.getenv(key='MONGODB_USR')
+PWD = os.getenv(key='MONGODB_PWD')
 CLUSTER_NAME = 'testcluster'
 APP_NAME = 'TestCluster'
 
