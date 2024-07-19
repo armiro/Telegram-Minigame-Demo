@@ -1,5 +1,7 @@
-import logging, os
+import logging
+import os
 from dotenv import load_dotenv
+
 from telegram.ext import Application, CommandHandler, ContextTypes
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from pymongo import MongoClient
@@ -11,7 +13,7 @@ logger = logging.getLogger(__name__)
 load_dotenv('./variables.env')
 
 BOT_TOKEN = os.getenv(key='BOT_TOKEN')
-APP_LINK = 'https://t.me/mustachio_bot/hoskinson'
+APP_LINK = os.getenv(key='APP_LINK')
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
