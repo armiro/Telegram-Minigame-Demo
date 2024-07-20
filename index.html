@@ -141,57 +141,57 @@
 		let lastTapTime = null;
 		let updateBalanceTimeout = null;
 
-		window.addEventListener('load', () => {
-            const tgWebApp = window.Telegram.WebApp;
-            tgWebApp.ready();
-
-            // Adding a delay to ensure initDataUnsafe is available
-            setTimeout(() => {
-                const userID = tgWebApp.initDataUnsafe?.user?.id;
-
-                if (userID) {
-                    fetch('http://127.0.0.1:5000/get_balance?guid=' + userID)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.balance) {
-                                const totalCoinsElement = document.getElementById('totalCoinsElement');
-                                totalCoinsElement.textContent = data.balance.toString();
-                            } else {
-                                console.error(data.error);
-                            }
-                        });
-                } else {
-                    console.error('User ID not found after delay');
-                }
-            }, 10000); // Adjust delay as necessary
-        });
-
-		// const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
-		// console.log('tg web app is:', tgWebApp)
-		// tgWebApp.expand();  // fully open window after launch
-		// tgWebApp.ready();
+		// window.addEventListener('load', () => {
+        //     const tgWebApp = window.Telegram.WebApp;
+        //     tgWebApp.ready();
 		//
-		// // get user unique ID (guid)
-		// console.log('init data is:', tgWebApp.initData)
-		// console.log('init data unsafe is:', tgWebApp.initDataUnsafe)
-		// console.log('user is: ', tgWebApp.initData.user)
+        //     // Adding a delay to ensure initDataUnsafe is available
+        //     setTimeout(() => {
+        //         const userID = tgWebApp.initDataUnsafe?.user?.id;
 		//
-		// const userID = tgWebApp.initDataUnsafe?.user?.id;
-		// console.log('user id:', userID);
-		// // const userID = 55662009;
-		// // const userID = tgWebApp.initDataUnsafe.start_param;
-		//
-		// // retrieve user's total coins from database
-		// fetch('http://127.0.0.1:5000/get_balance?guid=' + userID)
-		// .then(response => response.json())
-		// .then(data => {
-		// 	if (data.balance) {
-		// 		totalCoins = data.balance;
-		// 		totalCoinsElement.textContent = totalCoins.toString();
-		// 	} else {
-		// 		console.error(data.error)
-		// 	}
-		// });
+        //         if (userID) {
+        //             fetch('http://127.0.0.1:5000/get_balance?guid=' + userID)
+        //                 .then(response => response.json())
+        //                 .then(data => {
+        //                     if (data.balance) {
+        //                         const totalCoinsElement = document.getElementById('totalCoinsElement');
+        //                         totalCoinsElement.textContent = data.balance.toString();
+        //                     } else {
+        //                         console.error(data.error);
+        //                     }
+        //                 });
+        //         } else {
+        //             console.error('User ID not found after delay');
+        //         }
+        //     }, 10000); // Adjust delay as necessary
+        // });
+
+		const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
+		console.log('tg web app is:', tgWebApp)
+		tgWebApp.expand();  // fully open window after launch
+		tgWebApp.ready();
+
+		// get user unique ID (guid)
+		console.log('init data is:', tgWebApp.initData)
+		console.log('init data unsafe is:', tgWebApp.initDataUnsafe)
+		console.log('user is: ', tgWebApp.initData.user)
+
+		const userID = tgWebApp.initDataUnsafe?.user?.id;
+		console.log('user id:', userID);
+		// const userID = 55662009;
+		// const userID = tgWebApp.initDataUnsafe.start_param;
+
+		// retrieve user's total coins from database
+		fetch('https://1eef-54-37-203-209.ngrok-free.app/get_balance?guid=' + userID)
+		.then(response => response.json())
+		.then(data => {
+			if (data.balance) {
+				totalCoins = data.balance;
+				totalCoinsElement.textContent = totalCoins.toString();
+			} else {
+				console.error(data.error)
+			}
+		});
 
 		// increment balance every 5 secs
 		function checkAndIncrement(){
@@ -225,7 +225,7 @@
 			updateBalanceTimeout = setTimeout(() => {
 
 				// send AJAX request to update balance on the server
-				fetch('http://127.0.0.1:5000/tap', {
+				fetch('https://1eef-54-37-203-209.ngrok-free.app/tap', {
 					method: 'POST',
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					body: new URLSearchParams({guid: userID, balance: totalCoins})
