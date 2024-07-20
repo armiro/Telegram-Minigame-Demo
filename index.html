@@ -182,7 +182,7 @@
 		// const userID = tgWebApp.initDataUnsafe.start_param;
 
 		// retrieve user's total coins from database
-		fetch('https://1eef-54-37-203-209.ngrok-free.app/get_balance?guid=' + userID)
+		fetch('https://pheasant-creative-goldfish.ngrok-free.app/get_balance?guid=' + userID)
 		.then(response => response.json())
 		.then(data => {
 			if (data.balance) {
@@ -225,7 +225,7 @@
 			updateBalanceTimeout = setTimeout(() => {
 
 				// send AJAX request to update balance on the server
-				fetch('https://1eef-54-37-203-209.ngrok-free.app/tap', {
+				fetch('https://pheasant-creative-goldfish.ngrok-free.app/tap', {
 					method: 'POST',
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					body: new URLSearchParams({guid: userID, balance: totalCoins})
