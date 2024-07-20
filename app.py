@@ -4,7 +4,7 @@ from mongodb_connection import users_collection
 
 
 app = Flask(__name__)
-CORS(app)  # enable cross-origin resource sharing
+CORS(app, resources={r"/*": {"origins": "*"}})  # enable cross-origin resource sharing
 
 
 @app.route('/tap', methods=['POST'])
@@ -19,10 +19,9 @@ def tap():
         return jsonify({'error': 'User not found!'}), 404
 
 
-@app.route('/get_balance', methods=['GET'])
+@app.route('/get_balance', methods=['POST'])
 def get_balance():
-    user_id = request.args.get('guid')
-    print('user id is:', user_id)
+    user_id = request.form.get('guid')
     user = users_collection.find_one({'guid': user_id})
     if user:
         return jsonify({'balance': user['balance']})
