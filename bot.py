@@ -18,7 +18,7 @@ APP_LINK = os.getenv(key='APP_LINK')
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     guid = update.effective_user.id
-    user_link = f'{APP_LINK}?guid={guid}'
+    user_link = f'{APP_LINK}?startapp={guid}'
     user = users_collection.find_one({'guid': guid})
     if not user:
         users_collection.insert_one({'guid': guid, 'balance': 0})
