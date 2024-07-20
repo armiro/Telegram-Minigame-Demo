@@ -147,19 +147,19 @@
 		tgWebApp.ready();
 
 		// get user unique ID (guid)
-		// console.log('init data is:', tgWebApp.initData)
-		// console.log('init data unsafe is:', tgWebApp.initDataUnsafe)
-		// console.log('user is: ', tgWebApp.initData.user)
-		//
-		// const params = new URLSearchParams(tgWebApp.initData);
-		// const userData = Object.fromEntries(params);
-		// userData.user = JSON.parse(userData.user);
-		// console.log('parsed user data is:', userData.user)
-		// const userID = tgWebApp.initDataUnsafe.user.id;
+		console.log('init data is:', tgWebApp.initData)
+		console.log('init data unsafe is:', tgWebApp.initDataUnsafe)
+		console.log('user is: ', tgWebApp.initData.user)
 
-		// console.log('user id:', userID);
+		const params = new URLSearchParams(tgWebApp.initData);
+		const userData = Object.fromEntries(params);
+		userData.user = JSON.parse(userData.user);
+		console.log('parsed user data is:', userData.user)
+
+		const userID = tgWebApp.initDataUnsafe.user.id;
+		console.log('user id:', userID);
 		// const userID = 55662009;
-		const userID = tgWebApp.initDataUnsafe.start_param;
+		// const userID = tgWebApp.initDataUnsafe.start_param;
 
 		// retrieve user's total coins from database
 		fetch('http://127.0.0.1:5000/get_balance?guid=' + userID)
