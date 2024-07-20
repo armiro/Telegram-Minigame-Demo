@@ -18,12 +18,13 @@ APP_LINK = os.getenv(key='APP_LINK')
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     guid = update.effective_user.id
+    user_link = f'{APP_LINK}?guid={guid}'
     user = users_collection.find_one({'guid': guid})
     if not user:
         users_collection.insert_one({'guid': guid, 'balance': 0})
 
     welcome_msg = "Welcome to the mini-game crypto bot! Tap on funny Donald Trump to earn $DJT tokens!"
-    keyboard = [[InlineKeyboardButton(text='Launch the Game!', web_app=WebAppInfo(url=APP_LINK))]]
+    keyboard = [[InlineKeyboardButton(text='Launch the Game!', web_app=WebAppInfo(url=user_link))]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(welcome_msg, reply_markup=reply_markup, parse_mode='HTML')
 
