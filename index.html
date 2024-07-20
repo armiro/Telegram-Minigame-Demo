@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Mustachio</title>
-	<script src="https://telegram.org/js/telegram-web-app.js" data-nscript="afterInteractive"></script>
     <style>
         body {
             margin: 0;
@@ -142,7 +142,7 @@
 		let updateBalanceTimeout = null;
 
 		const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
-		console.log('tg web app:', tgWebApp)
+		console.log('tg web app is:', tgWebApp)
 		tgWebApp.expand();  // fully open window after launch
 		tgWebApp.ready();
 
@@ -151,6 +151,10 @@
 		console.log('init data unsafe is:', tgWebApp.initDataUnsafe)
 		console.log('user is: ', tgWebApp.initData.user)
 
+		const params = new URLSearchParams(tgWebApp.initData);
+		const userData = Object.fromEntries(params);
+		userData.user = JSON.parse(userData.user)
+		console.log('parsed user data is:', userData.user)
 		const userID = tgWebApp.initData.user.id;
 
 		// console.log('user id:', userID);
