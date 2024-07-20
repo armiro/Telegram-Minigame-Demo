@@ -153,9 +153,9 @@
 
 		const params = new URLSearchParams(tgWebApp.initData);
 		const userData = Object.fromEntries(params);
-		userData.user = JSON.parse(userData.user)
+		userData.user = JSON.parse(userData.user);
 		console.log('parsed user data is:', userData.user)
-		const userID = tgWebApp.initData.user.id;
+		const userID = tg.initDataUnsafe.user.id;
 
 		// console.log('user id:', userID);
 		// const userID = 55662009;
