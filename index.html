@@ -159,8 +159,7 @@
 
 		// console.log('user id:', userID);
 		// const userID = 55662009;
-		const url = new URL(window.location.href);
-		const userID = url.searchParams.get('guid')
+		const userID = tgWebApp.initDataUnsafe.start_param;
 
 		// retrieve user's total coins from database
 		fetch('http://127.0.0.1:5000/get_balance?guid=' + userID)
