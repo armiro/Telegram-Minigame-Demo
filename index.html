@@ -142,21 +142,14 @@
 		let updateBalanceTimeout = null;
 
 		const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
-		// console.log('tg web app is:', tgWebApp)
 		tgWebApp.expand();  // fully open window after launch
-		tgWebApp.ready();
+		tgWebApp.ready();  // wait to be fully loaded
 
-		// get user unique ID (guid)
-		// console.log('init data is:', tgWebApp.initData)
-		// console.log('init data unsafe is:', tgWebApp.initDataUnsafe)
-		// console.log('user is: ', tgWebApp.initData.user)
-
+		// get user unique ID (guid) and construct custom url
 		const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
-		// console.log('user id:', userID);
-		// const userID = '55662009';
-		// const userID = tgWebApp.initDataUnsafe.start_param;
 		const url = 'https://pheasant-creative-goldfish.ngrok-free.app/get_balance?guid=' + encodeURIComponent(userID)
-		// retrieve user's total coins from database
+
+		// retrieve user's total coins balance from database
 		fetch(url, {
 			method: 'POST',
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -207,9 +200,9 @@
 				fetch('https://pheasant-creative-goldfish.ngrok-free.app/tap', {
 					method: 'POST',
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-					body: new URLSearchParams({guid: userID, balance: totalCoins})
+					body: new URLSearchParams({guid: userID, balance: totalCoins.toString()})
 				});
-			}, 5000);
+			}, 1000);  // update coin balance after 1 second of inactivity
         });
 
 		// run incrementation function 
