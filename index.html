@@ -176,13 +176,13 @@
 		console.log('init data unsafe is:', tgWebApp.initDataUnsafe)
 		console.log('user is: ', tgWebApp.initData.user)
 
-		// const userID = tgWebApp.initDataUnsafe?.user?.id;
-		console.log('user id:', userID);
-		const userID = '1573006448';
+		const userID = tgWebApp.initDataUnsafe?.user?.id;
+		// console.log('user id:', userID);
+		// const userID = '1573006448';
 		// const userID = tgWebApp.initDataUnsafe.start_param;
 
 		// retrieve user's total coins from database
-		fetch('https://pheasant-creative-goldfish.ngrok-free.app/get_balance?guid=' + userID)
+		fetch('https://pheasant-creative-goldfish.ngrok-free.app/get_balance?guid=' + encodeURIComponent(userID.toString()))
 		.then(response => response.json())
 		.then(data => {
 			if (data.balance) {
