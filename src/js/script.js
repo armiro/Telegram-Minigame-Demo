@@ -7,20 +7,20 @@ const counterElement = document.querySelector('.counter');
 const totalCoinsElement = document.querySelector('.total-coins');
 const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
 
-tgWebApp.expand();  // fully open window after launch
 tgWebApp.ready();  // wait to be fully loaded
+tgWebApp.expand();  // fully open window after launch
 
-// change secondary bg color based on theme
-function setSecBgColor() {
-    const theme = tgWebApp.colorScheme;
-    if (theme === 'dark') {
-        document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', 'rgb(12, 36, 97)');
-    } else if (theme === 'light') {
-        document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', 'rgb(74, 105, 189)');
-    }
-}
-setSecBgColor();
-tgWebApp.onEvent('themeChanged', setSecBgColor);
+// // change secondary bg color based on theme
+// function setSecBgColor() {
+//     const theme = tgWebApp.colorScheme;
+//     if (theme === 'dark') {
+//         document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', 'rgb(12, 36, 97)');
+//     } else if (theme === 'light') {
+//         document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', 'rgb(74, 105, 189)');
+//     }
+// }
+// setSecBgColor();
+// tgWebApp.onEvent('themeChanged', setSecBgColor);
 
 
 // get user unique ID (guid) and construct custom url
