@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('/assets/bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.coin-container {
+    position: relative;
+    width: 70vw;
+    height: 70vh;
+}
+
+.coin-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.total-coins {
+    position: absolute;
+    bottom: 5.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 6vh;
+    font-weight: bold;
+    color: #ffeaa7;
+    text-shadow: 4px 4px 8px rgba(255, 234, 167, 0.5);
+}
+
+.menu-bar {
+    position: absolute;
+    bottom: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70vw;
+    height: 7.5vh;
+    background-color: rgba(250, 177, 160, 0.6);
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 2px;
+}
+
+.menu-item {
+    width: 5vh;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.menu-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.menu-item:hover {
+    transform: scale(1.05);
+}
+
+.counter-container {
+    position: absolute;
+    top: 4vh;
+    left: 10vw;
+    display: flex;
+    align-items: center;
+    background-image: url('/assets/charge_balance.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 18vw;
+    height: 5vh;
+    padding-left: 1.5vw;
+    font-size: 2.6vh;
+    font-weight: bold;
+    color: rgba(99, 110, 114, 1.0);
+    justify-content: center;
+    margin-left: auto;
+}
+
+.counter {
+    text-shadow: 4px 4px 8px rgba(99, 110, 0, 0.5);
+    padding-left: 5.5vw;
+}
