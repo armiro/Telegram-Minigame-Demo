@@ -155,7 +155,7 @@
 
 		// get user unique ID (guid) and construct custom url
 		const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
-		const url = '{{ server_url }}/get_balance?guid=' + encodeURIComponent(userID)
+		const url = 'https://pheasant-creative-goldfish.ngrok-free.app/get_balance?guid=' + encodeURIComponent(userID)
 
 		// retrieve user's total coins balance from database
 		fetch(url, {
@@ -205,7 +205,7 @@
 			updateBalanceTimeout = setTimeout(() => {
 
 				// send AJAX request to update balance on the server
-				fetch('{{ server_url }}/tap', {
+				fetch('https://pheasant-creative-goldfish.ngrok-free.app/tap', {
 					method: 'POST',
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					body: new URLSearchParams({guid: userID, balance: totalCoins.toString()})
