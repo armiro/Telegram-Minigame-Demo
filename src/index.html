@@ -21,7 +21,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('./assets/bg.png');
+            background-image: url('../assets/bg.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -96,7 +96,7 @@
 			left: 10vw;
 			display: flex;
 			align-items: center;
-			background-image: url('./assets/charge_balance.png');
+			background-image: url('../assets/charge_balance.png');
 			background-size: contain;
 			background-repeat: no-repeat;
 			width: 18vw;
@@ -117,22 +117,22 @@
 </head>
 <body>
 	<div class="coin-container">
-        <img src="./assets/coin.png" alt="Funny Hoskinson">
+        <img src="../assets/coin.png" alt="Funny Hoskinson">
         <div class="total-coins">0</div>
     </div>
 	
 	<div class="menu-bar">
 		<div class="menu-item">
-			<img src="./assets/menu_icons/wallet.png" alt="wallet">
+			<img src="../assets/menu_icons/wallet.png" alt="wallet">
 		</div>
 		<div class="menu-item">
-			<img src="./assets/menu_icons/earn.png" alt="earn">
+			<img src="../assets/menu_icons/earn.png" alt="earn">
 		</div>
 		<div class="menu-item">
-			<img src="./assets/menu_icons/ranking.png" alt="ranking">
+			<img src="../assets/menu_icons/ranking.png" alt="ranking">
 		</div>
 		<div class="menu-item">
-			<img src="./assets/menu_icons/refer.png" alt="refer">
+			<img src="../assets/menu_icons/refer.png" alt="refer">
 		</div>
 	</div>
     
@@ -155,7 +155,7 @@
 
 		// get user unique ID (guid) and construct custom url
 		const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
-		const url = 'https://pheasant-creative-goldfish.ngrok-free.app/get_balance?guid=' + encodeURIComponent(userID)
+		const url = '{{ server_url }}/get_balance?guid=' + encodeURIComponent(userID)
 
 		// retrieve user's total coins balance from database
 		fetch(url, {
@@ -205,7 +205,7 @@
 			updateBalanceTimeout = setTimeout(() => {
 
 				// send AJAX request to update balance on the server
-				fetch('https://pheasant-creative-goldfish.ngrok-free.app/tap', {
+				fetch('{{ server_url }}/tap', {
 					method: 'POST',
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					body: new URLSearchParams({guid: userID, balance: totalCoins.toString()})
