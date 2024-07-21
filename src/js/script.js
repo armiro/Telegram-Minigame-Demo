@@ -10,12 +10,18 @@ const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
 tgWebApp.expand();  // fully open window after launch
 tgWebApp.ready();  // wait to be fully loaded
 
-// check for system light/dark theme
-function setThemeClass() {
-    document.documentElement.className = tgWebApp.colorScheme;
+// change secondary bg color based on theme
+function setSecBgColor() {
+    const theme = tgWebApp.colorScheme;
+    if (theme === 'dark') {
+        document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', 'rgb(12, 36, 97)');
+    } else if (theme === 'light') {
+        document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', 'rgb(74, 105, 189)');
+    }
 }
-tgWebApp.onEvent('themeChanged', setThemeClass);
-setThemeClass();
+setSecBgColor();
+tgWebApp.onEvent('themeChanged', setSecBgColor);
+
 
 // get user unique ID (guid) and construct custom url
 const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
