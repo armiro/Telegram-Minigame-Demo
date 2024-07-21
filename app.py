@@ -1,18 +1,10 @@
-import os
-from dotenv import load_dotenv
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from mongodb_connection import users_collection
 
 
-load_dotenv('./variables.env')
-app = Flask(__name__, template_folder='src')
+app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # enable cross-origin resource sharing
-
-
-@app.route('/')
-def home():
-    return render_template('index.html', server_url=os.getenv('SERVER_URL'))
 
 
 @app.route('/tap', methods=['POST'])
