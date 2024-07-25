@@ -21,6 +21,7 @@ tgWebApp.expand();  // fully open window after launch
 // }
 // setSecBgColor();
 // tgWebApp.onEvent('themeChanged', setSecBgColor);
+document.documentElement.style.removeProperty('--tg-theme-secondary-bg-color');
 
 
 // get user unique ID (guid) and construct custom url
