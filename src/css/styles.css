@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('/assets/bg.png');
+    background-image: url('../../assets/bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -80,7 +80,7 @@ body {
     left: 10vw;
     display: flex;
     align-items: center;
-    background-image: url('/assets/charge_balance.png');
+    background-image: url('../../assets/charge_balance.png');
     background-size: contain;
     background-repeat: no-repeat;
     width: 18vw;
