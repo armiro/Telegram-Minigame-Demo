@@ -5,7 +5,7 @@ function shareReferral() {
         navigator.share({
             title: 'Mustachio Referral',
             text: shareText,
-            url: window.location.href // url of current page
+            // url: window.location.href // url of current page
         })
             .then(() => console.log('ref link was successfully shared!'))
             .catch((error) => console.error('Error sharing:', error))
