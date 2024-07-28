@@ -1,6 +1,6 @@
 function shareReferral() {
-    const shareText = `join me on playing Mustachio and receive 200 coins as your welcome bonus!\n` +
-        `https://t.me/mustachio_bot/hoskinson?startapp=${window.localStorage.getItem('referralCode')}`;
+    const shareText = `Join me on playing Mustachio and receive 200 coins as your welcome bonus!\n` +
+        `https://t.me/mustachio_bot?start=${window.localStorage.getItem('referralCode')}`;
     if (navigator.share) {
         navigator.share({
             title: 'Mustachio Referral',
