@@ -45,6 +45,7 @@ fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
     if (data.balance) {
         totalCoins = data.balance;
         totalCoinsElement.textContent = totalCoins.toString();
+        window.referralCode = data.ref_code;  // retrieve ref code & make it available to other files
     } else {
         console.error('Error:', data.error);
     }
