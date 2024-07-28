@@ -19,13 +19,13 @@ load_dotenv('./variables.env')
 
 
 def generate_ref_code(guid, length=REF_CODE_LENGTH):
-    hashed_id = hashlib.sha256(str(guid).encode()).hexdigest()
+    hashed_id = hashlib.sha256(guid.encode()).hexdigest()
     return hashed_id[:length]
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     app_link = os.getenv(key='APP_LINK')
-    guid = update.effective_user.id
+    guid = str(update.effective_user.id)
     referred_by = context.args[0] if context.args else None
 
     user = users_collection.find_one({'guid': guid})  # use `guid` as primary key
