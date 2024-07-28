@@ -24,7 +24,7 @@ def get_balance():
     user_id = request.form.get('guid')
     user = users_collection.find_one({'guid': user_id})
     if user:
-        return jsonify({'balance': user['balance']})
+        return jsonify({'balance': user['balance'], 'ref_code': user['ref_code']})
     else:
         users_collection.insert_one({'guid': user_id, 'balance': 0})
         return jsonify({'balance': 0})
