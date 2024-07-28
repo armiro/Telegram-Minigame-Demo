@@ -97,3 +97,30 @@ body {
     text-shadow: 4px 4px 8px rgba(99, 110, 0, 0.5);
     padding-left: 5.5vw;
 }
+
+.invite-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0,2);
+    text-align: center;
+    width: 60vw;
+}
+
+.invite-button {
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 0.5vh;
+    cursor: pointer;
+    border-radius: 5px;
+}
