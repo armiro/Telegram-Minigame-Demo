@@ -1,3 +1,9 @@
+* {
+    -webkit-tap-highlight-color: transparent;
+} /* disable ripple effect in Android devices */
+
+
+/*** common body & menu bar styles present in all pages ***/
 body {
     margin: 0;
     padding: 0;
@@ -9,34 +15,6 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
-
-.coin-container {
-    position: relative;
-    width: 70vw;
-    height: 70vh;
-}
-
-.coin-container img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-}
-
-.total-coins {
-    position: absolute;
-    bottom: 5.5vh;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 6vh;
-    font-weight: bold;
-    color: #ffeaa7;
-    text-shadow: 4px 4px 8px rgba(255, 234, 167, 0.5);
 }
 
 .menu-bar {
@@ -74,6 +52,36 @@ body {
     transform: scale(1.05);
 }
 
+
+/*** home page styles (present in index.html) ***/
+.coin-container {
+    position: relative;
+    width: 70vw;
+    height: 70vh;
+}
+
+.coin-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.total-coins {
+    position: absolute;
+    bottom: 5.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 6vh;
+    font-weight: bold;
+    color: #ffeaa7;
+    text-shadow: 4px 4px 8px rgba(255, 234, 167, 0.5);
+}
+
 .counter-container {
     position: absolute;
     top: 4vh;
@@ -98,29 +106,86 @@ body {
     padding-left: 5.5vw;
 }
 
+
+/*** referral page styles (present in referral.html) ***/
 .invite-box {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0,2);
+    background-color: rgba(189, 195, 199, 0.3);
+    padding: 5vh;
+    border-radius: 2vw;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 60vw;
 }
 
+.invite-heading {
+    color: #ecf0f1;
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5vh;
+}
+
+.invite-text {
+    color: #ecf0f1;
+    font-family: 'Verdana', sans-serif;
+    font-size: 1.8vh;
+}
+
 .invite-button {
-    background-color: var(--tg-theme-button-color);
-    color: var(--tg-theme-button-text-color);
+    background-color: rgba(255, 234, 167, 0.9);
+    color: rgba(0, 0, 0, 1.0);
     border: none;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 1.5vh;
     margin-top: 0.5vh;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 0.4vw;
 }
+
+
+/*** boosters page styles (present in boosters.html) ***/
+.boosters-box {
+    width: 80vw;
+    height: 70vh;
+    margin-bottom: 6vh;
+    padding: 4vh 5vw;
+    background-color: rgba(189, 195, 199, 0.3);
+    border-radius: 2vw;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;  /* enable scrolling if content overflows */
+}
+
+.booster-container {
+    display: flex;
+    margin: 2vh 0;
+    padding: 2vh;
+    align-items: center;
+    background-color: rgba(255, 234, 167, 0.75);
+    border-radius: 1vw;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 2.5vh;
+    font-weight: bold;
+    position: relative;
+}
+
+
+.booster-cost {
+    margin-right: 2vw;
+    padding: 2vh;
+    position: absolute;
+    right: 3vw;
+    background-color: rgba(250, 177, 160, 1.0);
+    border-radius: 1vw;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 2.5vh;
+    font-weight: bolder;
+}
+
