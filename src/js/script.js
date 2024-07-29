@@ -2,11 +2,10 @@ let tapLimit = TAP_LIMIT_MAX;
 let totalCoins = 0;
 let lastTapTime = null;
 let updateBalanceTimeout = null;
-let speed = null;
+let speed = 1;
 
 const counterElement = document.querySelector('.counter');
 const totalCoinsElement = document.querySelector('.total-coins');
-const coinContainerElement = document.querySelector('.coin-container');
 const coinImageElement = document.querySelector('.coin-container img');
 
 const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
