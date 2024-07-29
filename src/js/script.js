@@ -1,9 +1,3 @@
-const BASE_URL = 'https://pheasant-creative-goldfish.ngrok-free.app';
-const TAP_LIMIT_MAX = 100;
-const TAP_INCREMENT_INTERVAL = 5000;
-const BALANCE_UPDATE_DELAY = 1000;
-
-
 let tapLimit = TAP_LIMIT_MAX;
 let totalCoins = 0;
 let lastTapTime = null;
@@ -31,8 +25,9 @@ function setSecBgColor() {
 setSecBgColor();
 tgWebApp.onEvent('themeChanged', setSecBgColor);
 
-// get user unique ID (guid)
+// get user unique ID (guid) and store in local storage
 const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
+window.localStorage.setItem('userID', userID);
 
 // retrieve user's total coins balance from database
 fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
@@ -45,7 +40,8 @@ fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
     if (data.balance) {
         totalCoins = data.balance;
         totalCoinsElement.textContent = totalCoins.toString();
-        window.localStorage.setItem('referralCode', data.ref_code);  // store ref_code to be accessible via other files
+        window.localStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
+        window.localStorage.setItem('totalCoins', totalCoins);  // store totalCoins to access via boosters script
     } else {
         console.error('Error:', data.error);
     }
@@ -60,7 +56,7 @@ function checkAndIncrement(){
     setTimeout(checkAndIncrement, TAP_INCREMENT_INTERVAL);
 }
 
-coinContainerElement.addEventListener('click', () => {
+coinImageElement.addEventListener('click', () => {
     coinImageElement.style.transform = 'translate(-50%, -50%) scale(0.95)';
     setTimeout(() => {
         coinImageElement.style.transform = 'translate(-50%, -50%) scale(1)';
@@ -86,6 +82,7 @@ coinContainerElement.addEventListener('click', () => {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 body: new URLSearchParams({guid: userID, balance: totalCoins.toString()})
             });
+            window.localStorage.setItem('totalCoins', totalCoins);  // update totalCoins in local storage
         }
     }, BALANCE_UPDATE_DELAY);  // update coin balance after 1 second of inactivity
 });
