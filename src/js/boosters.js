@@ -11,27 +11,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const boosterCost = parseInt(boosterCostElement.textContent, 10);
         const boosterStatus = window.localStorage.getItem(`booster-${boosterID}-status`);
 
-        if (boosterStatus === 'done') {
-            boosterCostElement.textContent = 'done';
+        if (boosterStatus === 'max') {
+            boosterCostElement.textContent = 'max';
         }
 
         boosterCostElement.addEventListener('click', () => {
-            if (boosterCostElement.textContent !== 'done' && totalCoins >= boosterCost) {
+            if (boosterCostElement.textContent !== 'max' && totalCoins >= boosterCost) {
                 // update totalCoins value & remaining balance
                 totalCoins -= boosterCost;
                 remainingBalance.textContent = totalCoins.toString();
                 // update totalCoins value in local storage (required when buying multiple boosters)
                 window.localStorage.setItem('totalCoins', totalCoins);
-                // replace boosterCost value with 'done' (when booster is only available once)
-                boosterCostElement.textContent = 'done';
-                window.localStorage.setItem(`booster-${boosterID}-status`, 'done')
-                // update user balance on the server
+                // replace boosterCost value with 'max' (no higher speeds available)
+                boosterCostElement.textContent = 'max';
+                window.localStorage.setItem(`booster-${boosterID}-status`, 'max')
+                // update user balance & speed on the server
                 fetch(`${BASE_URL}/tap`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    body: new URLSearchParams({guid: userID, balance: totalCoins.toString()})
+                    body: new URLSearchParams({guid: userID, balance: totalCoins.toString(), speed: '2.0'})
                 })
-            } else if (boosterCostElement.textContent !== 'done'){
+            } else if (boosterCostElement.textContent !== 'max'){
                 alert('Not enough coins!');
             }
         })
