@@ -32,8 +32,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not user:
         new_ref_code = generate_ref_code(guid=guid)  # generate new user's referral code
         init_balance = WELCOME_BONUS if referred_by else 0
-        users_collection.insert_one({'guid': guid, 'balance': init_balance, 'ref_code': new_ref_code,
-                                     'referred_by': referred_by, 'num_referrals': 0})
+        users_collection.insert_one({'guid': guid, 'balance': init_balance, 'speed': 1.0,
+                                     'ref_code': new_ref_code, 'referred_by': referred_by, 'num_referrals': 0})
         if referred_by:
             referrer = users_collection.find_one({'ref_code': referred_by})  # `ref_code` is also a primary key
             if referrer:
