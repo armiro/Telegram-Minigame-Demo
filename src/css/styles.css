@@ -150,6 +150,16 @@ body {
 
 
 /*** boosters page styles (present in boosters.html) ***/
+.balance-display {
+    left: 2vw;
+    top: 2vh;
+    position: absolute;
+    color: #ffeaa7;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 3vh;
+    font-weight: bold;
+}
+
 .boosters-box {
     width: 80vw;
     height: 70vh;
