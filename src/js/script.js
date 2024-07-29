@@ -42,7 +42,7 @@ fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
         totalCoinsElement.textContent = totalCoins.toString();
         window.localStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
         window.localStorage.setItem('totalCoins', totalCoins);  // store totalCoins to access via boosters script
-        speed = data.speed;
+        speed = parseInt(data.speed, 10);
     } else {
         console.error('Error:', data.error);
     }
