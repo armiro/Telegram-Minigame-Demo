@@ -2,6 +2,7 @@ let tapLimit = TAP_LIMIT_MAX;
 let totalCoins = 0;
 let lastTapTime = null;
 let updateBalanceTimeout = null;
+let speed = null;
 
 const counterElement = document.querySelector('.counter');
 const totalCoinsElement = document.querySelector('.total-coins');
@@ -42,6 +43,7 @@ fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
         totalCoinsElement.textContent = totalCoins.toString();
         window.localStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
         window.localStorage.setItem('totalCoins', totalCoins);  // store totalCoins to access via boosters script
+        speed = data.speed;
     } else {
         console.error('Error:', data.error);
     }
@@ -63,10 +65,10 @@ coinImageElement.addEventListener('click', () => {
     }, 100);
 
     // decrement limit with each tap & increment total coins, unless it is 0
-    if (tapLimit > 0) {
-        tapLimit--;
+    if (tapLimit > (speed - 1)) {
+        tapLimit = tapLimit - speed;
         counterElement.textContent = tapLimit.toString();
-        totalCoins++;
+        totalCoins = totalCoins + speed;
         totalCoinsElement.textContent = totalCoins.toString();
     }
 
