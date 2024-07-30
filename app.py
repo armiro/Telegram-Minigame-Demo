@@ -28,7 +28,7 @@ def get_balance():
         return jsonify({'balance': user['balance'], 'ref_code': user['ref_code'], 'speed': user['speed']})
     else:
         users_collection.insert_one({'guid': user_id, 'balance': 0, 'speed': 1})
-        return jsonify({'balance': 0})
+        return jsonify({'balance': 0, 'speed': 1})
 
 
 if __name__ == '__main__':
