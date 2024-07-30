@@ -37,7 +37,7 @@ fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
 })
 .then(response => response.json())
 .then(data => {
-    if (data.balance) {
+    if (typeof data.balance !== 'undefined') {
         totalCoins = parseInt(data.balance, 10);
         totalCoinsElement.textContent = totalCoins.toString();
         window.localStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
