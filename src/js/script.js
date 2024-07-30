@@ -2,7 +2,7 @@ let tapLimit = TAP_LIMIT_MAX;
 let totalCoins = 0;
 let lastTapTime = null;
 let updateBalanceTimeout = null;
-let speed = 1;
+let speed = null;
 
 const counterElement = document.querySelector('.counter');
 const totalCoinsElement = document.querySelector('.total-coins');
@@ -38,7 +38,7 @@ fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
 .then(response => response.json())
 .then(data => {
     if (data.balance) {
-        totalCoins = data.balance;
+        totalCoins = parseInt(data.balance, 10);
         totalCoinsElement.textContent = totalCoins.toString();
         window.localStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
         window.localStorage.setItem('totalCoins', totalCoins);  // store totalCoins to access via boosters script
