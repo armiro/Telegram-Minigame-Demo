@@ -81,7 +81,7 @@ coinImageElement.addEventListener('click', () => {
             fetch(`${BASE_URL}/tap`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: new URLSearchParams({guid: userID, balance: totalCoins.toString()})
+                body: new URLSearchParams({guid: userID, balance: totalCoins.toString(), speed: speed.toString()})
             });
             window.localStorage.setItem('totalCoins', totalCoins);  // update totalCoins in local storage
         }
