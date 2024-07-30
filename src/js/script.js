@@ -27,7 +27,7 @@ tgWebApp.onEvent('themeChanged', setSecBgColor);
 
 // get user unique ID (guid) and store in local storage
 const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
-window.localStorage.setItem('userID', userID);
+window.sessionStorage.setItem('userID', userID);
 
 // retrieve user's total coins balance from database
 fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
@@ -40,8 +40,8 @@ fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
     if (typeof data.balance !== 'undefined') {
         totalCoins = parseInt(data.balance, 10);
         totalCoinsElement.textContent = totalCoins.toString();
-        window.localStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
-        window.localStorage.setItem('totalCoins', totalCoins);  // store totalCoins to access via boosters script
+        window.sessionStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
+        window.sessionStorage.setItem('totalCoins', totalCoins);  // store totalCoins to access via boosters script
         speed = parseInt(data.speed, 10);
     } else {
         console.error('Error:', data.error);
@@ -83,7 +83,7 @@ coinImageElement.addEventListener('click', () => {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 body: new URLSearchParams({guid: userID, balance: totalCoins.toString(), speed: speed.toString()})
             });
-            window.localStorage.setItem('totalCoins', totalCoins);  // update totalCoins in local storage
+            window.sessionStorage.setItem('totalCoins', totalCoins);  // update totalCoins in local storage
         }
     }, BALANCE_UPDATE_DELAY);  // update coin balance after 1 second of inactivity
 });
