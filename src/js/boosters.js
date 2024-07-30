@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const boosterContainers = document.querySelectorAll('.booster-container');
     const remainingBalance = document.querySelector('.balance-display .user-balance');
-    const userID = window.localStorage.getItem('userID');
+    const userID = window.localStorage.getItem('userID');  // better to use tgWebApp attr?
     let totalCoins = parseInt(window.localStorage.getItem('totalCoins'), 10);
     remainingBalance.textContent = totalCoins.toString();
 
@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // update totalCoins value & remaining balance
                 totalCoins -= boosterCost;
                 remainingBalance.textContent = totalCoins.toString();
-                // update totalCoins value in local storage (required when buying multiple boosters)
-                window.localStorage.setItem('totalCoins', totalCoins);
+                // update totalCoins value in local storage (required when buying multiple boosters) redundant?
+                // window.localStorage.setItem('totalCoins', totalCoins);
                 // replace boosterCost value with 'max' (no higher speeds available)
                 boosterCostElement.textContent = 'max';
                 window.localStorage.setItem(`booster-${boosterID}-status`, 'max')
