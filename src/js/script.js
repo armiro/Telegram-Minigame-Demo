@@ -123,11 +123,12 @@ coinImageElement.addEventListener('click', () => {
     }
 });
 
-window.addEventListener('beforeunload', (event) => {
-    event.preventDefault();
-    event.returnValue = '';
-    updateBalance();
-});
+// window.addEventListener('beforeunload', (event) => {
+//     event.preventDefault();
+//     event.returnValue = '';
+//     updateBalance();
+// });
+tgWebApp.onEvent('viewportChanged', updateBalance);
 
 
 // run incrementation function
