@@ -2,7 +2,7 @@ let tapLimit = TAP_LIMIT_MAX;
 let totalCoins = 0;
 let lastTapTime = null;
 let updateBalanceTimeout = null;
-let speed = null;
+let speed = 1;
 
 const counterElement = document.querySelector('.counter');
 const totalCoinsElement = document.querySelector('.total-coins');
@@ -13,8 +13,14 @@ const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
 tgWebApp.ready();  // wait to be fully loaded
 tgWebApp.expand();  // fully open window after launch
 
-// change secondary bg color based on theme
+
 function setSecBgColor() {
+    /**
+     * Change secondary background color based on the current theme
+     *
+     * @global {object} tgWebApp
+     * @returns {void}
+     */
     const theme = tgWebApp.colorScheme;
     if (theme === 'dark') {
         document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', 'rgb(12, 36, 97)');
@@ -22,6 +28,56 @@ function setSecBgColor() {
         document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', 'rgb(74, 105, 189)');
     }
 }
+
+
+function checkAndIncrement(){
+    /**
+     * increment user tap balance every `TAP_INCREMENT_INTERVAL` seconds
+     *
+     * @global {number} tapLimit
+     * @global {number} TAP_LIMIT_MAX
+     * @global {HTMLElement} counterElement
+     * @returns {void}
+     */
+    if (tapLimit < TAP_LIMIT_MAX) {
+        tapLimit ++;
+        counterElement.textContent = tapLimit.toString();
+    }
+    setTimeout(checkAndIncrement, TAP_INCREMENT_INTERVAL);
+}
+
+
+function updateBalance() {
+    /**
+     * Send AJAX request to update user balance & tap speed on the server
+     * Also update `totalCoins` value in session storage
+     *
+     * @global {string} BASE_URL
+     * @global {string} userID
+     * @global {number} totalCoins
+     * @global {number} speed
+     * @returns {Promise<void>}
+     * @throws {Error} if server request fails
+     */
+    fetch(`${BASE_URL}/tap`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({guid: userID, balance: totalCoins.toString(), speed: speed.toString()})
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Server responded with an error');
+            }
+            console.log('user balance updated successfully!');
+            window.sessionStorage.setItem('totalCoins', totalCoins);  // update totalCoins in session storage
+        })
+        .catch(error => {
+            console.error('error:', error);
+            alert('Failed updating coin balance! Try again later.')
+        })
+}
+
+
 setSecBgColor();
 tgWebApp.onEvent('themeChanged', setSecBgColor);
 
@@ -47,15 +103,10 @@ fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
         console.error('Error:', data.error);
     }
 })
-
-// increment balance every 5 secs
-function checkAndIncrement(){
-    if (tapLimit < TAP_LIMIT_MAX) {
-        tapLimit ++;
-        counterElement.textContent = tapLimit.toString();
-    }
-    setTimeout(checkAndIncrement, TAP_INCREMENT_INTERVAL);
-}
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Our server is down! Try again later.');
+    })
 
 coinImageElement.addEventListener('click', () => {
     coinImageElement.style.transform = 'translate(-50%, -50%) scale(0.95)';
@@ -77,13 +128,7 @@ coinImageElement.addEventListener('click', () => {
     clearTimeout(updateBalanceTimeout);
     updateBalanceTimeout = setTimeout(() => {
         if (Date.now() - lastTapTime >= BALANCE_UPDATE_DELAY) {
-            // send AJAX request to update balance on the server
-            fetch(`${BASE_URL}/tap`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: new URLSearchParams({guid: userID, balance: totalCoins.toString(), speed: speed.toString()})
-            });
-            window.sessionStorage.setItem('totalCoins', totalCoins);  // update totalCoins in local storage
+            updateBalance();
         }
     }, BALANCE_UPDATE_DELAY);  // update coin balance after 1 second of inactivity
 });
