@@ -123,17 +123,17 @@ coinImageElement.addEventListener('click', () => {
     }
 });
 
-window.addEventListener('beforeunload', (event) => {
-    event.preventDefault();
-    event.returnValue = '';
-    updateBalance();
-});
+// window.addEventListener('beforeunload', (event) => {
+//     event.preventDefault();
+//     event.returnValue = '';
+//     updateBalance();
+// });
 
-// window.addEventListener('visibilitychange', () => {
-//     if (document.hidden) {
-//         updateBalance();
-//     }
-// })
+window.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        updateBalance();
+    }
+})
 
 // tgWebApp.onEvent('viewportChanged', updateBalance);
 
