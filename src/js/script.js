@@ -82,8 +82,7 @@ setSecBgColor();
 tgWebApp.onEvent('themeChanged', setSecBgColor);
 
 // get user unique ID (guid) and store in local storage
-// const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
-const userID = '45009090';
+const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
 window.sessionStorage.setItem('userID', userID);
 
 // retrieve user's total coins balance from database
