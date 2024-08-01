@@ -82,7 +82,8 @@ setSecBgColor();
 tgWebApp.onEvent('themeChanged', setSecBgColor);
 
 // get user unique ID (guid) and store in local storage
-const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
+// const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
+const userID = '45009090';
 window.sessionStorage.setItem('userID', userID);
 
 // retrieve user's total coins balance from database
@@ -121,17 +122,14 @@ coinImageElement.addEventListener('click', () => {
         totalCoins = totalCoins + speed;
         totalCoinsElement.textContent = totalCoins.toString();
     }
-
-    lastTapTime = Date.now();  // update last tap time
-
-    // clear previous timeout and set a new one
-    clearTimeout(updateBalanceTimeout);
-    updateBalanceTimeout = setTimeout(() => {
-        if (Date.now() - lastTapTime >= BALANCE_UPDATE_DELAY) {
-            updateBalance();
-        }
-    }, BALANCE_UPDATE_DELAY);  // update coin balance after 1 second of inactivity
 });
+
+window.addEventListener('beforeunload', (event) => {
+    event.preventDefault();
+    event.returnValue = '';
+    updateBalance();
+});
+
 
 // run incrementation function
 checkAndIncrement();
