@@ -5,7 +5,7 @@ let speed = 1;
 const counterElement = document.querySelector('.counter');
 const totalCoinsElement = document.querySelector('.total-coins');
 const coinImageElement = document.querySelector('.coin-container img');
-const storedTotalCoins = window.sessionStorage.getItem('totalCoins');
+const storedTotalCoins = window.sessionStorage.getItem('totalCoins');  // can be renamed to `totalCoins`
 const storedBoosterStatus = window.sessionStorage.getItem(`booster-speed2xCost-status`);
 
 const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
@@ -66,7 +66,7 @@ function updateBalance() {
     })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Server responded with an error');
+                throw new Error('server responded with an error');
             }
             console.log('user balance updated successfully!');
         })
@@ -86,8 +86,8 @@ window.sessionStorage.setItem('userID', userID);
 
 if (storedTotalCoins && storedBoosterStatus) {
     totalCoins = parseInt(storedTotalCoins, 10);
+    totalCoinsElement.textContent = storedTotalCoins;
     speed = 2;
-    totalCoinsElement.textContent = storedTotalCoins
 } else {
     // retrieve user's total coins balance from database
     fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
