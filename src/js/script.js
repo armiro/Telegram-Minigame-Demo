@@ -1,12 +1,12 @@
 let tapLimit = TAP_LIMIT_MAX;
 let totalCoins = 0;
-let lastTapTime = null;
-let updateBalanceTimeout;
 let speed = 1;
 
 const counterElement = document.querySelector('.counter');
 const totalCoinsElement = document.querySelector('.total-coins');
 const coinImageElement = document.querySelector('.coin-container img');
+const storedTotalCoins = window.sessionStorage.getItem('totalCoins');
+const storedBoosterStatus = window.sessionStorage.getItem(`booster-speed2xCost-status`);
 
 const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
 
@@ -69,7 +69,6 @@ function updateBalance() {
                 throw new Error('Server responded with an error');
             }
             console.log('user balance updated successfully!');
-            window.sessionStorage.setItem('totalCoins', totalCoins);  // update totalCoins in session storage
         })
         .catch(error => {
             console.error('error:', error);
@@ -85,28 +84,34 @@ tgWebApp.onEvent('themeChanged', setSecBgColor);
 const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
 window.sessionStorage.setItem('userID', userID);
 
-// retrieve user's total coins balance from database
-fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: new URLSearchParams({'guid': userID})
-})
-.then(response => response.json())
-.then(data => {
-    if (typeof data.balance !== 'undefined') {
-        totalCoins = parseInt(data.balance, 10);
-        totalCoinsElement.textContent = totalCoins.toString();
-        window.sessionStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
-        window.sessionStorage.setItem('totalCoins', totalCoins);  // store totalCoins to access via boosters script
-        speed = parseInt(data.speed, 10);
-    } else {
-        console.error('Error:', data.error);
-    }
-})
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Our server is down! Try again later.');
+if (storedTotalCoins && storedBoosterStatus) {
+    totalCoins = parseInt(storedTotalCoins, 10);
+    speed = 2;
+    totalCoinsElement.textContent = storedTotalCoins
+} else {
+    // retrieve user's total coins balance from database
+    fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({'guid': userID})
     })
+    .then(response => response.json())
+    .then(data => {
+        if (typeof data.balance !== 'undefined') {
+            totalCoins = parseInt(data.balance, 10);
+            totalCoinsElement.textContent = totalCoins.toString();
+            window.sessionStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
+            window.sessionStorage.setItem('totalCoins', totalCoins);  // store totalCoins to access via boosters script
+            speed = parseInt(data.speed, 10);
+        } else {
+            console.error('Error:', data.error);
+        }
+    })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Our server is down! Try again later.');
+        })
+}
 
 coinImageElement.addEventListener('click', () => {
     coinImageElement.style.transform = 'translate(-50%, -50%) scale(0.95)';
@@ -120,23 +125,12 @@ coinImageElement.addEventListener('click', () => {
         counterElement.textContent = tapLimit.toString();
         totalCoins = totalCoins + speed;
         totalCoinsElement.textContent = totalCoins.toString();
+        window.sessionStorage.setItem('totalCoins', totalCoins);  // update totalCoins in session storage
     }
 });
 
-// window.addEventListener('beforeunload', (event) => {
-//     event.preventDefault();
-//     event.returnValue = '';
-//     updateBalance();
-// });
-
-window.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-        updateBalance();
-    }
+window.addEventListener('pagehide', () => {
+    updateBalance();
 })
 
-// tgWebApp.onEvent('viewportChanged', updateBalance);
-
-
-// run incrementation function
-checkAndIncrement();
+checkAndIncrement();  // run incrementation function
