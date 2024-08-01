@@ -1,7 +1,7 @@
 let tapLimit = TAP_LIMIT_MAX;
 let totalCoins = 0;
 let lastTapTime = null;
-let updateBalanceTimeout = null;
+let updateBalanceTimeout;
 let speed = 1;
 
 const counterElement = document.querySelector('.counter');
@@ -82,7 +82,8 @@ setSecBgColor();
 tgWebApp.onEvent('themeChanged', setSecBgColor);
 
 // get user unique ID (guid) and store in local storage
-const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
+// const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
+const userID = '55662009';
 window.sessionStorage.setItem('userID', userID);
 
 // retrieve user's total coins balance from database
@@ -123,12 +124,19 @@ coinImageElement.addEventListener('click', () => {
     }
 });
 
-// window.addEventListener('beforeunload', (event) => {
-//     event.preventDefault();
-//     event.returnValue = '';
-//     updateBalance();
-// });
-tgWebApp.onEvent('viewportChanged', updateBalance);
+window.addEventListener('beforeunload', (event) => {
+    event.preventDefault();
+    event.returnValue = '';
+    updateBalance();
+});
+
+// window.addEventListener('visibilitychange', () => {
+//     if (document.hidden) {
+//         updateBalance();
+//     }
+// })
+
+// tgWebApp.onEvent('viewportChanged', updateBalance);
 
 
 // run incrementation function
