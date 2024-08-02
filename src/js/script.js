@@ -1,4 +1,4 @@
-(() => {
+(async() => {
     let tapLimit = TAP_LIMIT_MAX;
     let totalCoins = parseInt(window.sessionStorage.getItem('totalCoins'), 10) || 0;
     let speed = 1;
@@ -10,7 +10,7 @@
     const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
 
 
-    function setSecBgColor() {
+    async function setSecBgColor() {
         /**
          * Change secondary background color based on the current theme
          *
@@ -54,7 +54,7 @@
     }
 
 
-    function updateBalance() {
+    async function updateBalance() {
         /**
          * Send AJAX request to update user balance & tap speed on the server
          * Also update `totalCoins` value in session storage
@@ -66,27 +66,27 @@
          * @returns {Promise<void>}
          * @throws {Error} if server request fails
          */
-        fetch(`${BASE_URL}/tap`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: new URLSearchParams({guid: userID, balance: totalCoins.toString(), speed: speed.toString()})
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('server responded with an error');
-                }
+        try {
+            const response = await fetch(`${BASE_URL}/tap`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: new URLSearchParams({guid: userID, balance: totalCoins.toString(), speed: speed.toString()})
+            });
+            if (!response.ok) {
+                console.error('server responded with an error:', response.statusText);
+            } else {
                 console.log('user balance updated successfully!');
-            })
-            .catch(error => {
-                console.error('error:', error);
-                alert('Failed updating coin balance! Try again later.')
-            })
+            }
+        } catch(error) {
+            console.error('error:', error);
+            alert('Failed updating coin balance! Try again later.')
+        }
     }
 
 
     tgWebApp.ready();  // wait to be fully loaded
     tgWebApp.expand();  // fully open window after launch
-    setSecBgColor();
+    await setSecBgColor();
     tgWebApp.onEvent('themeChanged', setSecBgColor);
 
     // get user unique ID (guid) and store in local storage
@@ -133,20 +133,20 @@
         }
     });
 
-    window.addEventListener('pagehide', () => {
-        updateBalance();
+    window.addEventListener('pagehide', async () => {
+        await updateBalance();
     })
 
-    tgWebApp.onEvent('close', () => {updateBalance();});
-    window.addEventListener('beforeunload', () => {updateBalance();});
+    tgWebApp.onEvent('close', async () => {await updateBalance();});
+    window.addEventListener('beforeunload', async () => {await updateBalance();});
 
-    document.addEventListener('visibilitychange', () => {
+    document.addEventListener('visibilitychange', async () => {
         if (document.visibilityState === 'hidden') {
-            updateBalance();
+            await updateBalance();
         }
     });
 
-    tgWebApp.onEvent('viewportChanged', () => {updateBalance();})
+    tgWebApp.onEvent('viewportChanged', async () => {await updateBalance();})
 
     checkAndIncrement();  // run incrementation function
 })();
