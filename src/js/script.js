@@ -152,10 +152,12 @@
     });
 
 
-    tgWebApp.onEvent('close', async () => {
+    // tgWebApp.onEvent('close', async () => {
+    //     await updateBalance();
+    // });
+    tgWebApp.onEvent('viewportChanged', async () => {
         await updateBalance();
-    });
-    // tgWebApp.onEvent('viewportChanged', async () => {await updateBalance();})
+    })
 
     checkAndIncrement();  // run incrementation function
 })();
