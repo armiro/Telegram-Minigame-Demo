@@ -54,6 +54,38 @@
     }
 
 
+    async function getBalance() {
+        /**
+         * retrieve user data record from database, based on Telegram User ID
+         *
+         * @global {string} BASE_URL
+         * @global {string} userID
+         * @returns {Promise<object|null>}
+         */
+        try {
+            const response = await fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: new URLSearchParams({'guid': userID})
+        });
+            if (!response.ok) {
+                console.log('server responded with an error: ' + response.statusText);
+                return null;
+            }
+            const data = await response.json();
+            if (typeof data.balance !== 'undefined') {
+                console.log('invalid response data');
+                return null;
+            }
+            return data;
+        } catch(error) {
+            console.error('Error fetching user balance:', error);
+            alert('Our server is down! Try again later.');
+            return null;
+        }
+    }
+
+
     async function updateBalance() {
         /**
          * Send AJAX request to update user balance & tap speed on the server
@@ -97,31 +129,17 @@
         totalCoinsElement.textContent = totalCoins;
         speed = 2;
     } else {
-        // retrieve user's total coins balance from database
-        fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
-            method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: new URLSearchParams({'guid': userID})
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (typeof data.balance !== 'undefined') {
-                totalCoins = parseInt(data.balance, 10);
-                totalCoinsElement.textContent = totalCoins.toString();
-                window.localStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
-                window.sessionStorage.setItem('totalCoins', totalCoins);  // store totalCoins to access via boosters script
-                speed = parseInt(data.speed, 10);
-            } else {
-                console.error('Error:', data.error);
-            }
-        })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Our server is down! Try again later.');
-            })
+        const data = await getBalance();
+        if (data) {
+            totalCoins = parseInt(data.balance, 10);
+            totalCoinsElement.textContent = totalCoins.toString();
+            window.localStorage.setItem('referralCode', data.ref_code);  // store to access via referral script
+            window.sessionStorage.setItem('totalCoins', totalCoins);  // store to access via boosters script
+            speed = parseInt(data.speed, 10);
+        }
     }
 
-    coinImageElement.addEventListener('click', () => {
+    coinImageElement.addEventListener('click', async () => {
         coinClickEffect();
         // decrement limit & increment total coins, unless it is 0
         if (tapLimit > (speed - 1)) {
