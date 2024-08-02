@@ -1,17 +1,12 @@
 let tapLimit = TAP_LIMIT_MAX;
-let totalCoins = 0;
+let totalCoins = parseInt(window.sessionStorage.getItem('totalCoins'), 10) || 0;
 let speed = 1;
 
 const counterElement = document.querySelector('.counter');
 const totalCoinsElement = document.querySelector('.total-coins');
 const coinImageElement = document.querySelector('.coin-container img');
-const storedTotalCoins = window.sessionStorage.getItem('totalCoins');  // can be renamed to `totalCoins`
-const storedBoosterStatus = window.sessionStorage.getItem(`booster-speed2xCost-status`);
-
+const boosterStatus = window.localStorage.getItem(`booster-speed2xCost-status`);
 const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
-
-tgWebApp.ready();  // wait to be fully loaded
-tgWebApp.expand();  // fully open window after launch
 
 
 function setSecBgColor() {
@@ -22,11 +17,22 @@ function setSecBgColor() {
      * @returns {void}
      */
     const theme = tgWebApp.colorScheme;
-    if (theme === 'dark') {
-        document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', 'rgb(12, 36, 97)');
-    } else if (theme === 'light') {
-        document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', 'rgb(74, 105, 189)');
-    }
+    let color = theme === 'dark' ? 'rgb(12, 36, 97)' : 'rgb(74, 105, 189)';
+    document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', color);
+}
+
+
+function coinClickEffect() {
+    /**
+     * effects on coin element when user taps on it
+     *
+     * @global {DOMElement} coinImageElement
+     * @returns {void}
+     */
+    coinImageElement.style.transform = 'translate(-50%, -50%) scale(0.95)';
+    setTimeout(() => {
+        coinImageElement.style.transform = 'translate(-50%, -50%) scale(1)';
+    }, 100);
 }
 
 
@@ -36,7 +42,7 @@ function checkAndIncrement(){
      *
      * @global {number} tapLimit
      * @global {number} TAP_LIMIT_MAX
-     * @global {HTMLElement} counterElement
+     * @global {DOMElement} counterElement
      * @returns {void}
      */
     if (tapLimit < TAP_LIMIT_MAX) {
@@ -77,6 +83,8 @@ function updateBalance() {
 }
 
 
+tgWebApp.ready();  // wait to be fully loaded
+tgWebApp.expand();  // fully open window after launch
 setSecBgColor();
 tgWebApp.onEvent('themeChanged', setSecBgColor);
 
@@ -84,9 +92,8 @@ tgWebApp.onEvent('themeChanged', setSecBgColor);
 const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
 window.sessionStorage.setItem('userID', userID);
 
-if (storedTotalCoins && storedBoosterStatus) {
-    totalCoins = parseInt(storedTotalCoins, 10);
-    totalCoinsElement.textContent = storedTotalCoins;
+if (totalCoins && boosterStatus) {  // when user goes
+    totalCoinsElement.textContent = totalCoins;
     speed = 2;
 } else {
     // retrieve user's total coins balance from database
@@ -100,7 +107,7 @@ if (storedTotalCoins && storedBoosterStatus) {
         if (typeof data.balance !== 'undefined') {
             totalCoins = parseInt(data.balance, 10);
             totalCoinsElement.textContent = totalCoins.toString();
-            window.sessionStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
+            window.localStorage.setItem('referralCode', data.ref_code);  // store ref_code to access via referral script
             window.sessionStorage.setItem('totalCoins', totalCoins);  // store totalCoins to access via boosters script
             speed = parseInt(data.speed, 10);
         } else {
@@ -114,12 +121,8 @@ if (storedTotalCoins && storedBoosterStatus) {
 }
 
 coinImageElement.addEventListener('click', () => {
-    coinImageElement.style.transform = 'translate(-50%, -50%) scale(0.95)';
-    setTimeout(() => {
-        coinImageElement.style.transform = 'translate(-50%, -50%) scale(1)';
-    }, 100);
-
-    // decrement limit with each tap & increment total coins, unless it is 0
+    coinClickEffect();
+    // decrement limit & increment total coins, unless it is 0
     if (tapLimit > (speed - 1)) {
         tapLimit = tapLimit - speed;
         counterElement.textContent = tapLimit.toString();
@@ -129,8 +132,11 @@ coinImageElement.addEventListener('click', () => {
     }
 });
 
-window.addEventListener('pagehide', () => {
-    updateBalance();
-})
+// window.addEventListener('pagehide', () => {
+//     updateBalance();
+// })
+
+tgWebApp.onEvent('close', () => {updateBalance();});
+window.addEventListener('beforeunload', () => {updateBalance();});
 
 checkAndIncrement();  // run incrementation function
