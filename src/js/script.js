@@ -152,12 +152,11 @@
     });
 
 
-    // tgWebApp.onEvent('close', async () => {
-    //     await updateBalance();
-    // });
-    tgWebApp.onEvent('viewportChanged', async () => {
+    window.addEventListener('beforeunload', async (event) => {
+        event.preventDefault();
+        event.returnValue = '';
         await updateBalance();
-    })
+    });
 
     checkAndIncrement();  // run incrementation function
 })();
