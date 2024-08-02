@@ -1,12 +1,14 @@
 (async() => {
     let tapLimit = TAP_LIMIT_MAX;
+    let lastTapTime = null;
+    let updateBalanceTimeout = null;
     let totalCoins = parseInt(window.sessionStorage.getItem('totalCoins'), 10) || 0;
     let speed = 1;
 
     const counterElement = document.querySelector('.counter');
     const totalCoinsElement = document.querySelector('.total-coins');
     const coinImageElement = document.querySelector('.coin-container img');
-    const boosterStatus = window.localStorage.getItem(`booster-speed2xCost-status`);
+    const boosterStatus = window.sessionStorage.getItem(`booster-speed2xCost-status`);  // change to localStorage after test
     const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
 
 
@@ -133,7 +135,7 @@
         if (data) {
             totalCoins = parseInt(data.balance, 10);
             totalCoinsElement.textContent = totalCoins.toString();
-            window.localStorage.setItem('referralCode', data.ref_code);  // store to access via referral script
+            window.sessionStorage.setItem('referralCode', data.ref_code);  // store to access via referral script
             window.sessionStorage.setItem('totalCoins', totalCoins);  // store to access via boosters script
             speed = parseInt(data.speed, 10);
         }
@@ -147,16 +149,19 @@
             counterElement.textContent = tapLimit.toString();
             totalCoins = totalCoins + speed;
             totalCoinsElement.textContent = totalCoins.toString();
-            window.sessionStorage.setItem('totalCoins', totalCoins);  // update totalCoins in session storage
         }
+
+        lastTapTime = Date.now();  // update last tap time
+        clearTimeout(updateBalanceTimeout);  // clear previous timeout
+        updateBalanceTimeout = setTimeout(async () => {
+            if (Date.now() - lastTapTime >= BALANCE_UPDATE_DELAY) {
+                await updateBalance();
+                window.sessionStorage.setItem('totalCoins', totalCoins);  // update totalCoins in session storage
+            }
+        }, BALANCE_UPDATE_DELAY);  // update balance after BALANCE_UPDATE_DELAY msecs of inactivity
     });
 
 
-    window.addEventListener('beforeunload', async (event) => {
-        event.preventDefault();
-        event.returnValue = '';
-        await updateBalance();
-    });
 
     checkAndIncrement();  // run incrementation function
 })();
