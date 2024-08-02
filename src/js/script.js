@@ -136,7 +136,13 @@ coinImageElement.addEventListener('click', () => {
 //     updateBalance();
 // })
 
-tgWebApp.onEvent('close', () => {updateBalance();});
-window.addEventListener('beforeunload', () => {updateBalance();});
+// tgWebApp.onEvent('close', () => {updateBalance();});
+// window.addEventListener('beforeunload', () => {updateBalance();});
+
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+        updateBalance();
+    }
+});
 
 checkAndIncrement();  // run incrementation function
