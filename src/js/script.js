@@ -1,3 +1,5 @@
+import { updateBalance, getBalance } from "./utils.js";
+
 (async() => {
     let tapLimit = TAP_LIMIT_MAX;
     let lastTapTime = null;
@@ -8,7 +10,7 @@
     const counterElement = document.querySelector('.counter');
     const totalCoinsElement = document.querySelector('.total-coins');
     const coinImageElement = document.querySelector('.coin-container img');
-    const boosterStatus = window.sessionStorage.getItem(`booster-speed2xCost-status`);  // change to localStorage after test
+    const boosterStatus = window.sessionStorage.getItem(`booster-speed2xCost-status`);
     const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
 
 
@@ -56,68 +58,6 @@
     }
 
 
-    async function getBalance() {
-        /**
-         * retrieve user data record from database, based on Telegram User ID
-         *
-         * @global {string} BASE_URL
-         * @global {string} userID
-         * @returns {Promise<object|null>}
-         */
-        try {
-            const response = await fetch(`${BASE_URL}/get_balance?guid=` + encodeURIComponent(userID), {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: new URLSearchParams({'guid': userID})
-        });
-            if (!response.ok) {
-                console.log('server responded with an error: ' + response.statusText);
-                return null;
-            }
-            const data = await response.json();
-            if (typeof data.balance === 'undefined') {
-                console.log('invalid response data');
-                return null;
-            }
-            return data;
-        } catch(error) {
-            console.error('Error fetching user balance:', error);
-            alert('Our server is down! Try again later.');
-            return null;
-        }
-    }
-
-
-    async function updateBalance() {
-        /**
-         * Send AJAX request to update user balance & tap speed on the server
-         * Also update `totalCoins` value in session storage
-         *
-         * @global {string} BASE_URL
-         * @global {string} userID
-         * @global {number} totalCoins
-         * @global {number} speed
-         * @returns {Promise<void>}
-         * @throws {Error} if server request fails
-         */
-        try {
-            const response = await fetch(`${BASE_URL}/tap`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: new URLSearchParams({guid: userID, balance: totalCoins.toString(), speed: speed.toString()})
-            });
-            if (!response.ok) {
-                console.error('server responded with an error:', response.statusText);
-            } else {
-                console.log('user balance updated successfully!');
-            }
-        } catch(error) {
-            console.error('error:', error);
-            alert('Failed updating coin balance! Try again later.')
-        }
-    }
-
-
     tgWebApp.ready();  // wait to be fully loaded
     tgWebApp.expand();  // fully open window after launch
     await setSecBgColor();
@@ -131,12 +71,12 @@
         totalCoinsElement.textContent = totalCoins;
         speed = 2;
     } else {
-        const data = await getBalance();
+        const data = await getBalance(BASE_URL, userID);
         if (data) {
             totalCoins = parseInt(data.balance, 10);
             totalCoinsElement.textContent = totalCoins.toString();
-            window.sessionStorage.setItem('referralCode', data.ref_code);  // store to access via referral script
-            window.sessionStorage.setItem('totalCoins', totalCoins);  // store to access via boosters script
+            window.sessionStorage.setItem('referralCode', data.ref_code);  // store to access via referral.js
+            window.sessionStorage.setItem('totalCoins', totalCoins);  // store to access via boosters.js
             speed = parseInt(data.speed, 10);
         }
     }
@@ -155,7 +95,7 @@
         clearTimeout(updateBalanceTimeout);  // clear previous timeout
         updateBalanceTimeout = setTimeout(async () => {
             if (Date.now() - lastTapTime >= BALANCE_UPDATE_DELAY) {
-                await updateBalance();
+                await updateBalance(BASE_URL, userID, totalCoins, speed);
                 window.sessionStorage.setItem('totalCoins', totalCoins);  // update totalCoins in session storage
             }
         }, BALANCE_UPDATE_DELAY);  // update balance after BALANCE_UPDATE_DELAY msecs of inactivity
