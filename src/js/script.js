@@ -73,7 +73,7 @@
                 return null;
             }
             const data = await response.json();
-            if (typeof data.balance !== 'undefined') {
+            if (typeof data.balance === 'undefined') {
                 console.log('invalid response data');
                 return null;
             }
@@ -125,7 +125,7 @@
     const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
     window.sessionStorage.setItem('userID', userID);
 
-    if (totalCoins && boosterStatus) {  // when user goes
+    if (totalCoins && boosterStatus) {
         totalCoinsElement.textContent = totalCoins;
         speed = 2;
     } else {
@@ -155,8 +155,8 @@
     //     await updateBalance();
     // })
 
-    tgWebApp.onEvent('close', async () => {await updateBalance();});
-    // window.addEventListener('beforeunload', async () => {await updateBalance();});
+    // tgWebApp.onEvent('close', async () => {await updateBalance();});
+    window.addEventListener('beforeunload', async () => {await updateBalance();});
     //
     // document.addEventListener('visibilitychange', async () => {
     //     if (document.visibilityState === 'hidden') {
@@ -164,7 +164,7 @@
     //     }
     // });
 
-    tgWebApp.onEvent('viewportChanged', async () => {await updateBalance();})
+    // tgWebApp.onEvent('viewportChanged', async () => {await updateBalance();})
 
     checkAndIncrement();  // run incrementation function
 })();
