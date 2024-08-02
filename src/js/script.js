@@ -151,18 +151,14 @@
         }
     });
 
-    window.addEventListener('pagehide', async () => {
-        await updateBalance();
-    })
 
     // tgWebApp.onEvent('close', async () => {await updateBalance();});
-
     //
-    // document.addEventListener('visibilitychange', async () => {
-    //     if (document.visibilityState === 'hidden') {
-    //         await updateBalance();
-    //     }
-    // });
+    document.addEventListener('visibilitychange', async () => {
+        if (document.visibilityState === 'hidden') {
+            await updateBalance();
+        }
+    });
 
     // tgWebApp.onEvent('viewportChanged', async () => {await updateBalance();})
 
