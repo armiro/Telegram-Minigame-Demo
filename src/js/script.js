@@ -133,18 +133,18 @@
         }
     });
 
-    // window.addEventListener('pagehide', () => {
-    //     updateBalance();
-    // })
+    window.addEventListener('pagehide', () => {
+        updateBalance();
+    })
 
-    // tgWebApp.onEvent('close', () => {updateBalance();});
+    tgWebApp.onEvent('close', () => {updateBalance();});
     window.addEventListener('beforeunload', () => {updateBalance();});
 
-    // document.addEventListener('visibilitychange', () => {
-    //     if (document.visibilityState === 'hidden') {
-    //         updateBalance();
-    //     }
-    // });
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+            updateBalance();
+        }
+    });
 
     tgWebApp.onEvent('viewportChanged', () => {updateBalance();})
 
