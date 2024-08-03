@@ -46,9 +46,7 @@ export async function updateBalance(url, id, balance, speed) {
         const response = await fetch(`${url}/tap`, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: new URLSearchParams({
-                guid: id, balance: balance.toString(), speed: speed.toString()
-            })
+            body: new URLSearchParams({guid: id, balance: balance, speed: speed})
         });
         if (!response.ok) {
             console.error('server responded with an error:', response.statusText);
