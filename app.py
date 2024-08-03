@@ -10,8 +10,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})  # enable cross-origin resource s
 @app.route('/tap', methods=['POST'])
 def tap():
     user_id = request.form['guid']
-    new_balance = request.form['balance']
-    speed = request.form['speed']
+    new_balance = int(request.form['balance'])
+    speed = int(request.form['speed'])
     user = users_collection.find_one({'guid': user_id})
     if user:
         users_collection.update_one({'guid': user_id}, {'$set': {'balance': new_balance, 'speed': speed}})
