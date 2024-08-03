@@ -1,7 +1,7 @@
 import { updateBalance, getBalance } from "./utils.js";
 
 (async() => {
-    let tapLimit = TAP_LIMIT_MAX;
+    let tapLimit = parseInt(window.localStorage.getItem('tapLimit'), 10) || TAP_LIMIT_MAX;
     let lastTapTime = null;
     let updateBalanceTimeout = null;
     let totalCoins = parseInt(window.sessionStorage.getItem('totalCoins'), 10) || 0;
@@ -10,7 +10,7 @@ import { updateBalance, getBalance } from "./utils.js";
     const counterElement = document.querySelector('.counter');
     const totalCoinsElement = document.querySelector('.total-coins');
     const coinImageElement = document.querySelector('.coin-container img');
-    const boosterStatus = window.sessionStorage.getItem(`booster-speed2xCost-status`);
+    const boosterStatus = window.localStorage.getItem(`booster-speed2xCost-status`);
     const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
 
 
@@ -41,23 +41,49 @@ import { updateBalance, getBalance } from "./utils.js";
     }
 
 
-    function checkAndIncrement(){
+    function incrementTapLimit(){
         /**
          * increment user tap balance every `TAP_INCREMENT_INTERVAL` seconds
+         * store incremented tap balance & current time in local storage
          *
          * @global {number} tapLimit
          * @global {number} TAP_LIMIT_MAX
          * @global {DOMElement} counterElement
+         * @global {number} TAP_INCREMENT_INTERVAL
          * @returns {void}
          */
-        if (tapLimit < TAP_LIMIT_MAX) {
-            tapLimit ++;
-            counterElement.textContent = tapLimit.toString();
-        }
-        setTimeout(checkAndIncrement, TAP_INCREMENT_INTERVAL);
+        setTimeout(() => {
+            if (tapLimit < TAP_LIMIT_MAX) {
+                tapLimit ++;
+                counterElement.textContent = tapLimit.toString();
+                window.localStorage.setItem('tapLimit', tapLimit);
+                window.localStorage.setItem('lastTapLimitUpdateTime', Date.now().toString());
+            }
+            incrementTapLimit();  // call again after the timeout
+        }, TAP_INCREMENT_INTERVAL);
     }
 
 
+    function updateTapLimit() {
+        /**
+         * update tap limit value after user returns to the webapp index page
+         *
+         * @global {number} TAP_INCREMENT_INTERVAL
+         * @global {number} TAP_LIMIT_MAX
+         * @returns {void}
+         */
+        const lastTapTime = parseInt(window.localStorage.getItem('lastTapLimitUpdateTime'), 10) || Date.now();
+        const intervalsElapsed = Math.floor((Date.now() - lastTapTime) / TAP_INCREMENT_INTERVAL);
+        if (intervalsElapsed > 0) {
+            tapLimit = Math.min(tapLimit + intervalsElapsed, TAP_LIMIT_MAX);
+            window.localStorage.setItem('tapLimit', tapLimit);
+            window.localStorage.setItem('lastTapLimitUpdateTime', Date.now().toString());
+        }
+        counterElement.textContent = tapLimit.toString();  // show updated tapLimit immediately after user returns
+    }
+
+
+    updateTapLimit();  // update tapLimit balance from last session (runs once)
     tgWebApp.ready();  // wait to be fully loaded
     tgWebApp.expand();  // fully open window after launch
     await setSecBgColor();
@@ -67,9 +93,9 @@ import { updateBalance, getBalance } from "./utils.js";
     const userID = tgWebApp.initDataUnsafe?.user?.id.toString();
     window.sessionStorage.setItem('userID', userID);
 
-    if (totalCoins && boosterStatus) {
+    if (totalCoins) {
         totalCoinsElement.textContent = totalCoins;
-        speed = 2;
+        speed = boosterStatus? 2 : 1;
     } else {
         const data = await getBalance(BASE_URL, userID);
         if (data) {
@@ -87,6 +113,8 @@ import { updateBalance, getBalance } from "./utils.js";
         if (tapLimit > (speed - 1)) {
             tapLimit = tapLimit - speed;
             counterElement.textContent = tapLimit.toString();
+            window.localStorage.setItem('tapLimit', tapLimit);
+            window.localStorage.setItem('lastTapLimitUpdateTime', Date.now().toString())
             totalCoins = totalCoins + speed;
             totalCoinsElement.textContent = totalCoins.toString();
         }
@@ -101,7 +129,5 @@ import { updateBalance, getBalance } from "./utils.js";
         }, BALANCE_UPDATE_DELAY);  // update balance after BALANCE_UPDATE_DELAY msecs of inactivity
     });
 
-
-
-    checkAndIncrement();  // run incrementation function
+    incrementTapLimit();  // run incrementation function
 })();
