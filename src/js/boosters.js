@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const boosterCostElement = container.querySelector('.booster-cost');
         const boosterID = boosterCostElement.id;
         const boosterCost = parseInt(boosterCostElement.textContent, 10);
-        const boosterStatus = window.sessionStorage.getItem(`booster-${boosterID}-status`);
+        const boosterStatus = window.localStorage.getItem(`booster-${boosterID}-status`);
 
         if (boosterStatus === 'max') {
             boosterCostElement.textContent = 'max';
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 remainingBalance.textContent = totalCoins.toString();
                 // replace boosterCost value with 'max' (no higher speeds available)
                 boosterCostElement.textContent = 'max';
-                window.sessionStorage.setItem(`booster-${boosterID}-status`, 'max')
+                window.localStorage.setItem(`booster-${boosterID}-status`, 'max')
             } else if (boosterCostElement.textContent !== 'max'){
                 alert('Not enough coins!');
             }
