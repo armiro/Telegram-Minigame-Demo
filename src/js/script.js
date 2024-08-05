@@ -29,6 +29,44 @@ import { updateBalance, getBalance } from "./utils.js";
     }
 
 
+    function createPlusOneEffect(x, y, escalation, timeout) {
+        /**
+         * create a new element for "+1" sign which triggers with click, moves upward and disappears
+         * @type {HTMLDivElement}
+         * @param {number} x - x-coordinates where "+1" effect appears
+         * @param {number} y - y-coordinates where "+1" effect appears
+         * @param {number} escalation - how high "+1" effect goes (in y-axis pixels)
+         * @param {number} timeout - how long "+1" effect stays before fadeout (in milliseconds)
+         * @returns {void}
+         */
+        const plusOneElement = document.createElement('div');
+        plusOneElement.textContent = '+1';
+        plusOneElement.style.position = 'absolute';
+        plusOneElement.style.left = `${x}px`;
+        plusOneElement.style.top = `${y}px`;
+        plusOneElement.style.fontSize = '24px';
+        plusOneElement.style.color = 'white';
+        plusOneElement.style.zIndex = '1000';
+        plusOneElement.style.pointerEvents = 'none';  // element doesn't interfere with other clicks
+
+        document.body.appendChild(plusOneElement);
+
+        // animate the element to move upwards and fade out
+        plusOneElement.animate([
+            { transform: 'translateY(0)', opacity: 1 },
+            { transform: `translateY(-${escalation}px)`, opacity: 0 }
+        ], {
+            duration: 1000,
+            easing: 'ease-out'
+        });
+
+        // remove the element after animation completion
+        setTimeout(() => {
+            plusOneElement.remove();
+        }, timeout);
+    }
+
+
     function coinClickEffect() {
         /**
          * effects on coin element when user taps on it
@@ -36,6 +74,7 @@ import { updateBalance, getBalance } from "./utils.js";
          * @global {DOMElement} coinImageElement
          * @returns {void}
          */
+        createPlusOneEffect(event.clientX, event.clientY, 120, 1000);
         coinImageElement.style.transform = 'translate(-50%, -50%) scale(0.95)';
         setTimeout(() => {
             coinImageElement.style.transform = 'translate(-50%, -50%) scale(1)';
