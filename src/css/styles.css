@@ -9,8 +9,8 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    /*justify-content: center;*/
-    align-items: center;
+    align-items: center;  /* center vertically */
+    justify-content: center;  /* center horizontally */
     height: 100vh;
     background-image: url('../../assets/bg.png');
     background-size: cover;
@@ -59,7 +59,7 @@ body {
     display: grid;
     position: relative;
     place-items: center;
-    top: 20vh;
+    top: -5vh;  /* place upper than center */
     width: 70vw;
     height: 40vh;
     background-color: transparent;
@@ -79,7 +79,7 @@ body {
     place-items: center;  /* place items vertically & horizontally in the center */
     width: 50vw;
     height: 10vh;
-    margin-top: 22.5vh;  /* ensure no overlap with coin container */
+    top: -2vh;  /* ensure no overlap with coin container */
     text-align: center;  /* center text within container */
     background-color: transparent;
 }
@@ -120,11 +120,11 @@ body {
 /*** referral page styles (present in referral.html) ***/
 .invite-box {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(189, 195, 199, 0.3);
-    padding: 5vh 3vw;
+    padding: 3vh 3vw;
     border-radius: 2vw;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -153,7 +153,8 @@ body {
     display: inline-block;
     font-family: 'Tahoma', sans-serif;
     font-size: 2vh;
-    margin-top: 0.5vh;
+    font-weight: bold;
+    margin-top: 1vh;
     cursor: pointer;
     border-radius: 0.4vw;
 }
@@ -181,7 +182,7 @@ body {
 
 .boosters-box {
     position: relative;
-    /*top: 1vh;*/
+    top: -5vh;
     width: 80vw;
     min-height: 20vh;
     margin: 0 0 2vh 0;
@@ -207,13 +208,13 @@ body {
 }
 
 .booster-cost {
-    margin-right: 2vw;
+    display: grid;
+    place-items: center;
     padding: 2vh;
     position: absolute;
     right: 3vw;
     background-color: rgba(250, 177, 160, 1.0);
     border-radius: 1vw;
-    text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 2.75vh;
     font-weight: bolder;
