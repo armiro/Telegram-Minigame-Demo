@@ -19,17 +19,17 @@ body {
 }
 
 .menu-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     position: absolute;
     bottom: 4vh;
     left: 50%;
     transform: translateX(-50%);
     width: 70vw;
     height: 7.5vh;
-    background-color: rgba(250, 177, 160, 0.6);
-    border-radius: 50px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    background-color: rgba(45, 52, 54, 1.0);
+    border-radius: 4vw;
     padding: 0 2px;
 }
 
@@ -44,13 +44,23 @@ body {
 }
 
 .menu-item img {
+    display: block;
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
 }
 
 .menu-item:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
+}
+
+.menu-item.gradient-color-item {
+    transform: scale(1.1);
+    background: linear-gradient(45deg, #6c5ce7, #81ecec);
+    -webkit-mask: var(--mask-url) no-repeat center;
+    -webkit-mask-size: contain;
+    mask: var(--mask-url) no-repeat center;
+    mask-size: contain;
 }
 
 
@@ -196,13 +206,13 @@ body {
 .booster-container {
     display: flex;
     margin: 1vh 0;
-    padding: 1vh 3vw;
+    padding: 0.5vh 3vw;
     align-items: center;
     background-color: rgba(255, 234, 167, 0.7);
     border-radius: 1vw;
     text-align: left;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 2.75vh;
+    font-size: 2.5vh;
     font-weight: bold;
     position: relative;
 }
@@ -210,13 +220,13 @@ body {
 .booster-cost {
     display: grid;
     place-items: center;
-    padding: 2vh;
+    padding: 1.5vh;
     position: absolute;
     right: 3vw;
     background-color: rgba(250, 177, 160, 1.0);
     border-radius: 1vw;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 2.75vh;
+    font-size: 2vh;
     font-weight: bolder;
 }
 
