@@ -75,9 +75,9 @@ import { updateBalance, getBalance } from "./utils.js";
          * @returns {void}
          */
         createPlusOneEffect(event.clientX, event.clientY, 120, 1000);
-        coinImageElement.style.transform = 'translate(-50%, -50%) scale(0.95)';
+        coinImageElement.style.transform = 'scale(0.95)';
         setTimeout(() => {
-            coinImageElement.style.transform = 'translate(-50%, -50%) scale(1)';
+            coinImageElement.style.transform = 'scale(1)';
         }, 100);
     }
 
