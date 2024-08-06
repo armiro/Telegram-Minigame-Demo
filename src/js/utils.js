@@ -58,3 +58,39 @@ export async function updateBalance(url, id, balance, speed) {
         alert('Failed updating coin balance! Try again later.');
     }
 }
+
+
+export async function activateMenuItemEffect() {
+    /**
+     * On each page, replace black page menu icon with a gradient-colored version
+     * @type {string}
+     * @returns {void}
+     */
+    const currentPage = window.location.pathname.split('/').pop();
+    const menuIconDir = '../../assets/menu_icons'
+    let currentElement;
+
+    switch (currentPage) {
+        case 'index.html':
+            currentElement = document.getElementById('wallet');
+            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/wallet.png")`);
+            break;
+        case 'boosters.html':
+            currentElement = document.getElementById('boosters');
+            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/earn.png")`);
+            break;
+        case 'ranking.html':
+            currentElement = document.getElementById('ranking');
+            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/ranking.png")`);
+            break;
+        case 'referral.html':
+            currentElement = document.getElementById('referral');
+            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/refer.png")`);
+            break;
+    }
+
+    if (currentElement) {
+        currentElement.querySelector('img').style.display = 'none';
+        currentElement.classList.add('gradient-color-item');
+    }
+}
