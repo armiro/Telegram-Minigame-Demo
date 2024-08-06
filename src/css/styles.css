@@ -8,7 +8,8 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    /*justify-content: center;*/
     align-items: center;
     height: 100vh;
     background-image: url('../../assets/bg.png');
@@ -55,9 +56,13 @@ body {
 
 /*** home page styles (present in index.html) ***/
 .coin-container {
+    display: grid;
     position: relative;
+    place-items: center;
+    top: 20vh;
     width: 70vw;
-    height: 70vh;
+    height: 40vh;
+    background-color: transparent;
 }
 
 .coin-container img {
@@ -65,18 +70,23 @@ body {
     max-height: 100%;
     object-fit: contain;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     cursor: pointer;
 }
 
+.total-coins-container {
+    display: grid;
+    position: relative;
+    place-items: center;  /* place items vertically & horizontally in the center */
+    width: 50vw;
+    height: 10vh;
+    margin-top: 22.5vh;  /* ensure no overlap with coin container */
+    text-align: center;  /* center text within container */
+    background-color: transparent;
+}
+
 .total-coins {
-    position: absolute;
-    bottom: 5.5vh;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 6vh;
+    object-fit: contain;
+    font-size: 6.5vh;
     font-weight: bold;
     color: #ffeaa7;
     text-shadow: 4px 4px 8px rgba(255, 234, 167, 0.5);
@@ -160,10 +170,21 @@ body {
     font-weight: bold;
 }
 
+.boosters-title {
+    position: absolute;
+    top: 0.5vh;
+    left: 5vw;
+    font-size: 20px;
+    font-style: italic;
+    color: rgba(255, 234, 167, 0.7);
+}
+
 .boosters-box {
+    position: relative;
+    /*top: 1vh;*/
     width: 80vw;
-    height: 70vh;
-    margin-bottom: 6vh;
+    min-height: 20vh;
+    margin: 0 0 2vh 0;
     padding: 4vh 5vw;
     background-color: rgba(189, 195, 199, 0.3);
     border-radius: 2vw;
@@ -173,8 +194,8 @@ body {
 
 .booster-container {
     display: flex;
-    margin: 2vh 0;
-    padding: 2vh;
+    margin: 1vh 0;
+    padding: 1vh 3vw;
     align-items: center;
     background-color: rgba(255, 234, 167, 0.7);
     border-radius: 1vw;
