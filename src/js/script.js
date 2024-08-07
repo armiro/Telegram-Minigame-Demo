@@ -138,7 +138,6 @@ import { updateBalance, getBalance } from "./utils.js";
     // check if user returned from other pages (storage access) or started new session (server call)
     if (totalCoins) {
         totalCoinsElement.textContent = totalCoins;
-        // speed = speedBoosterStatus? 2 : 1;
     } else {
         const data = await getBalance(BASE_URL, userID);
         if (data) {
@@ -151,9 +150,9 @@ import { updateBalance, getBalance } from "./utils.js";
     }
 
     coinImageElement.addEventListener('click', async () => {
-        coinClickEffect();
         // decrement limit & increment total coins, unless it is 0
         if (tapLimit > (speed - 1)) {
+            coinClickEffect();
             tapLimit = tapLimit - speed;
             counterElement.textContent = tapLimit.toString();
             window.localStorage.setItem('tapLimit', tapLimit);
