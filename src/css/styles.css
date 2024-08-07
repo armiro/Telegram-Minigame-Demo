@@ -43,6 +43,7 @@ body {
     align-items: center;
     cursor: pointer;
     transition: transform 0.2s ease;
+    transform-origin: center;
 }
 
 .menu-item img {
