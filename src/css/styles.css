@@ -12,11 +12,21 @@ body {
     align-items: center;  /* center vertically */
     justify-content: center;  /* center horizontally */
     height: 100vh;
-    background-image: url('../../assets/bg.png');
+    background-image: none;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     font-family: 'Lato', sans-serif;
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* video is behind other contents */
 }
 
 .menu-bar {
@@ -86,8 +96,8 @@ body {
     position: relative;
     place-items: center;
     top: -5vh;  /* place upper than center */
-    width: 70vw;
-    height: 40vh;
+    width: 70vw;  /* =756px in full hd screen */
+    height: 40vh;  /* ~756px in full hd screen */
     background-color: transparent;
 }
 
