@@ -29,7 +29,7 @@ import { updateBalance, getBalance } from "./utils.js";
     }
 
 
-    function createPlusOneEffect(x, y, escalation, timeout) {
+    function createPlusOneEffect(value, x, y, escalation, timeout) {
         /**
          * create a new element for "+1" sign which triggers with click, moves upward and disappears
          * @type {HTMLDivElement}
@@ -40,11 +40,11 @@ import { updateBalance, getBalance } from "./utils.js";
          * @returns {void}
          */
         const plusOneElement = document.createElement('div');
-        plusOneElement.textContent = '+1';
+        plusOneElement.textContent = `+${value}`;
         plusOneElement.style.position = 'absolute';
         plusOneElement.style.left = `${x}px`;
         plusOneElement.style.top = `${y}px`;
-        plusOneElement.style.fontSize = '24px';
+        plusOneElement.style.fontSize = '32px';
         plusOneElement.style.color = 'white';
         plusOneElement.style.zIndex = '1000';
         plusOneElement.style.pointerEvents = 'none';  // element doesn't interfere with other clicks
@@ -56,7 +56,7 @@ import { updateBalance, getBalance } from "./utils.js";
             { transform: 'translateY(0)', opacity: 1 },
             { transform: `translateY(-${escalation}px)`, opacity: 0 }
         ], {
-            duration: 1000,
+            duration: (timeout*1.5),
             easing: 'ease-out'
         });
 
@@ -74,7 +74,7 @@ import { updateBalance, getBalance } from "./utils.js";
          * @global {DOMElement} coinImageElement
          * @returns {void}
          */
-        createPlusOneEffect(event.clientX, event.clientY, 120, 1000);
+        createPlusOneEffect(speed, event.clientX, event.clientY, 140, 1000);
         coinImageElement.style.transform = 'scale(0.95)';
         setTimeout(() => {
             coinImageElement.style.transform = 'scale(1)';
