@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 	<link rel="stylesheet" href="../css/styles.css">
     <script src="../js/config.js"></script>
 	<script type="module" src="../js/boosters.js" defer></script>
+    <script type="module">
+        import { activateMenuItemEffect } from "../js/utils.js";
+        activateMenuItemEffect();
+    </script>
     <title>Mustachio</title>
 </head>
 <body>
@@ -54,11 +59,5 @@
             <img src="../../assets/menu_icons/refer.png" alt="refer">
         </div>
     </div>
-
-    <script type="module">
-        import { activateMenuItemEffect } from "../js/utils.js";
-        activateMenuItemEffect();
-    </script>
-
 </body>
 </html>
