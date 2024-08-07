@@ -35,6 +35,7 @@ body {
 }
 
 .menu-item {
+    position: relative;
     width: 5vh;
     height: 5vh;
     display: flex;
@@ -52,16 +53,29 @@ body {
 }
 
 .menu-item:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .menu-item.gradient-color-item {
-    transform: scale(1.1);
+    transform: scale(1.05);
     background: linear-gradient(45deg, #6c5ce7, #81ecec);
     -webkit-mask: var(--mask-url) no-repeat center;
     -webkit-mask-size: contain;
     mask: var(--mask-url) no-repeat center;
     mask-size: contain;
+}
+
+.upcoming-tag {
+    position: absolute;
+    top: -0.5vh;
+    right: -2vw;
+    background: linear-gradient(45deg, #6c5ce7, #81ecec);
+    font-size: 1.5vh;
+    padding: 0.2vh 0.75vw;
+    border-radius: 0.5vh;
+    font-weight: bolder;
+    z-index: 1;
+    pointer-events: none;
 }
 
 
