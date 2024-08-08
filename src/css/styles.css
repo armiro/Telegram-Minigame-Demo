@@ -46,8 +46,8 @@ body {
 
 .menu-item {
     position: relative;
-    width: 5vh;
-    height: 5vh;
+    width: 4.5vh;
+    height: 4.5vh;
     display: flex;
     justify-content: center;
     align-items: center;
