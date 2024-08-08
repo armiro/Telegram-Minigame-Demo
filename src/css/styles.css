@@ -79,7 +79,7 @@ body {
 .upcoming-tag {
     position: absolute;
     top: -0.5vh;
-    right: -2vw;
+    right: -3.5vw;
     background: linear-gradient(45deg, #6c5ce7, #81ecec);
     font-size: 1.5vh;
     padding: 0.2vh 0.75vw;
@@ -132,24 +132,21 @@ body {
     position: absolute;
     top: 4vh;
     left: 10vw;
-    display: flex;
-    align-items: center;
-    background-image: url('../../assets/charge_balance.png');
+    display: grid;
+    place-items: center;
+    background-image: url('../../assets/charge_balance.webp');
     background-size: contain;
     background-repeat: no-repeat;
-    width: 18vw;
-    height: 5vh;
-    padding-left: 1.5vw;
-    font-size: 2.6vh;
-    font-weight: bold;
-    color: rgba(99, 110, 114, 1.0);
-    justify-content: center;
-    margin-left: auto;
+    width: 22vw;  /* ~238px in full hd screen */
+    height: 5.5vh;  /* ~106px in full hd screen */
 }
 
 .counter {
+    font-size: 2.6vh;
+    font-weight: bold;
+    color: rgba(99, 110, 114, 1.0);
     text-shadow: 4px 4px 8px rgba(99, 110, 0, 0.5);
-    padding-left: 5.5vw;
+    padding-left: 5vw;
 }
 
 
