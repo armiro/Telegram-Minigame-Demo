@@ -9,10 +9,7 @@
 	<script src="https://telegram.org/js/telegram-web-app.js" defer></script>
 	<script src="src/js/config.js" defer></script>
 	<script type="module" src="./src/js/script.js" defer></script>
-	<script type="module">
-        import { activateMenuItemEffect } from "./src/js/utils.js";
-        document.addEventListener('DOMContentLoaded', () => {activateMenuItemEffect();})
-    </script>
+
 	<title>Mustachio</title>
 
 </head>
@@ -47,5 +44,10 @@
     <div class="counter-container">
         <div class="counter">100</div>
     </div>
+
+	<script type="module">
+		import { activateMenuItemEffect } from "./src/js/utils.js";
+		document.addEventListener('DOMContentLoaded', () => {activateMenuItemEffect();})
+	</script>
 </body>
 </html>
