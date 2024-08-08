@@ -12,21 +12,18 @@ body {
     align-items: center;  /* center vertically */
     justify-content: center;  /* center horizontally */
     height: 100vh;
-    background-image: none;
+    background: linear-gradient(to bottom right, #4b6cb7, #182848);
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     font-family: 'Lato', sans-serif;
 }
 
-.video-background {
+.background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    z-index: -1; /* video is behind other contents */
+    z-index: -1; /* background layer */
 }
 
 .menu-bar {
@@ -125,7 +122,7 @@ body {
     font-size: 6.5vh;
     font-weight: bold;
     color: #ffeaa7;
-    text-shadow: 4px 4px 8px rgba(255, 234, 167, 0.5);
+    text-shadow: 1px 1px 8px rgba(255, 234, 167, 0.3);
 }
 
 .counter-container {
@@ -146,7 +143,7 @@ body {
     font-weight: bold;
     color: rgba(99, 110, 114, 1.0);
     text-shadow: 4px 4px 8px rgba(99, 110, 0, 0.5);
-    padding-left: 5vw;
+    padding-left: 7vw;
 }
 
 
@@ -192,13 +189,14 @@ body {
 
 /*** boosters page styles (present in boosters.html) ***/
 .balance-display {
-    left: 2vw;
-    top: 2vh;
+    left: 5vw;
+    top: 3vh;
     position: absolute;
     color: #ffeaa7;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: transparent;
     font-size: 3vh;
     font-weight: bold;
+    text-shadow: 1px 1px 8px rgba(99, 110, 0, 0.5);
 }
 
 .boosters-title {
@@ -212,7 +210,7 @@ body {
 
 .boosters-box {
     position: relative;
-    top: -5vh;
+    top: -10vh;
     width: 80vw;
     min-height: 20vh;
     margin: 0 0 2vh 0;
