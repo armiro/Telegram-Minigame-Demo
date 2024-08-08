@@ -5,9 +5,9 @@
     <meta name="viewport"
 		  content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 	<link rel="stylesheet" href="src/css/styles.css">
-	<script src="src/js/config.js"></script>
+	<script src="https://telegram.org/js/telegram-web-app.js" defer></script>
+	<script src="src/js/config.js" defer></script>
 	<script type="module" src="./src/js/script.js" defer></script>
 	<script type="module">
         import { activateMenuItemEffect } from "./src/js/utils.js";
@@ -18,12 +18,14 @@
 </head>
 <body>
 
-	<video class="video-background" autoplay muted loop playsinline>
-		<source src="./assets/bg.mp4" type="video/mp4">
-	</video>
+	<div class="background">
+		<video class="video-background" autoplay muted loop playsinline>
+			<source src="./assets/bg.mp4" type="video/mp4">
+		</video>
+	</div>
 
 	<div class="coin-container">
-        <img src="./assets/coin.png" alt="Funny Hoskinson">
+        <img src="./assets/coin.webp" alt="Funny Elon Musk">
     </div>
 
 	<div class="total-coins-container">
@@ -32,17 +34,17 @@
 	
 	<div class="menu-bar">
 		<div class="menu-item" id="wallet" style="--mask-url: none">
-			<img src="./assets/menu_icons/wallet.png" alt="wallet">
+			<img src="./assets/menu_icons/wallet.webp" alt="wallet">
 		</div>
 		<div class="menu-item" id="boosters" style="--mask-url: none" onclick="location.href='./src/pages/boosters.html'">
-			<img src="./assets/menu_icons/earn.png" alt="earn">
+			<img src="./assets/menu_icons/earn.webp" alt="earn">
 		</div>
 		<div class="menu-item" id="ranking" style="--mask-url: none">
-			<img src="./assets/menu_icons/ranking.png" alt="ranking">
+			<img src="./assets/menu_icons/ranking.webp" alt="ranking">
 			<div class="upcoming-tag">soon</div>
 		</div>
 		<div class="menu-item" id="referral" style="--mask-url: none" onclick="location.href='./src/pages/referral.html'">
-			<img src="./assets/menu_icons/refer.png" alt="refer">
+			<img src="./assets/menu_icons/refer.webp" alt="refer">
 		</div>
 	</div>
     
