@@ -73,19 +73,19 @@ export async function activateMenuItemEffect() {
     switch (currentPage) {
         case 'index.html':
             currentElement = document.getElementById('wallet');
-            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/wallet.png")`);
+            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/wallet.webp")`);
             break;
         case 'boosters.html':
             currentElement = document.getElementById('boosters');
-            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/earn.png")`);
+            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/earn.webp")`);
             break;
         case 'ranking.html':
             currentElement = document.getElementById('ranking');
-            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/ranking.png")`);
+            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/ranking.webp")`);
             break;
         case 'referral.html':
             currentElement = document.getElementById('referral');
-            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/refer.png")`);
+            currentElement.style.setProperty('--mask-url', `url("${menuIconDir}/refer.webp")`);
             break;
     }
 
