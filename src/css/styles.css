@@ -15,6 +15,7 @@ body {
     background: linear-gradient(to bottom right, #4b6cb7, #182848);
     background-size: cover;
     font-family: 'Lato', sans-serif;
+    overflow: hidden;  /* disable scrolling */
 }
 
 .background {
@@ -142,7 +143,7 @@ body {
     font-size: 2.6vh;
     font-weight: bold;
     color: rgba(99, 110, 114, 1.0);
-    text-shadow: 4px 4px 8px rgba(99, 110, 0, 0.5);
+    text-shadow: 1px 1px 8px rgba(99, 110, 0, 0.3);
     padding-left: 7vw;
 }
 
