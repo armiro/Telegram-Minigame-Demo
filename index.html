@@ -11,14 +11,14 @@
 	<script type="module" src="./src/js/script.js" defer></script>
 	<script type="module">
         import { activateMenuItemEffect } from "./src/js/utils.js";
-        activateMenuItemEffect();
+        document.addEventListener('DOMContentLoaded', () => {activateMenuItemEffect();})
     </script>
 	<title>Mustachio</title>
 
 </head>
 <body>
 
-	<video class="video-background" autoplay muted loop>
+	<video class="video-background" autoplay muted loop playsinline>
 		<source src="./assets/bg.mp4" type="video/mp4">
 	</video>
 
