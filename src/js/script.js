@@ -9,7 +9,7 @@ import { updateBalance, getBalance } from "./utils.js";
     const tgWebApp = window.Telegram.WebApp;  // import Telegram lib
 
     let tapLimitMax = limitBoosterStatus? TAP_LIMIT_MAX + 20 : TAP_LIMIT_MAX;
-    let tapLimit = parseInt(window.localStorage.getItem('tapLimit'), 10) || tapLimitMax;
+    let tapLimit = parseInt(window.localStorage.getItem('tapLimit'), 10) ?? tapLimitMax;
     let lastTapTime = null;
     let updateBalanceTimeout = null;
     let totalCoins = parseInt(window.sessionStorage.getItem('totalCoins'), 10) || 0;
