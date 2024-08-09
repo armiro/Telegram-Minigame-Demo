@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const boosterContainers = document.querySelectorAll('.booster-container');
     const remainingBalance = document.querySelector('.balance-display .user-balance');
     const userID = window.sessionStorage.getItem('userID');
-    let totalCoins = parseInt(window.sessionStorage.getItem('totalCoins'), 10);
+    let totalCoins = parseInt(window.sessionStorage.getItem('totalCoins'), 10) || 0;
     remainingBalance.textContent = totalCoins.toString();
 
     boosterContainers.forEach(container => {
