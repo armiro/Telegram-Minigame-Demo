@@ -114,6 +114,7 @@ import { updateBalance, getBalance } from "./utils.js";
          * @global {number} tapLimitMax
          * @returns {void}
          */
+        tapLimit = isNaN(tapLimit) ? tapLimitMax : tapLimit;  // if to value is stored (NaN), set to max limit
         const lastTapTime = parseInt(window.localStorage.getItem('lastTapLimitUpdateTime'), 10) || Date.now();
         const intervalsElapsed = Math.floor((Date.now() - lastTapTime) / TAP_INCREMENT_INTERVAL);
         if (intervalsElapsed > 0) {
