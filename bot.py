@@ -42,7 +42,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     {'$inc': {'balance': REF_BONUS, 'num_referrals': 1}}
                 )
 
-    welcome_msg = "Welcome to the mini-game crypto bot! Tap on funny Elon Musk to earn $MUSK tokens!"
+    welcome_msg = "Welcome to the mini-game crypto bot! Tap on funny Elon Musk to earn $MuskTap points!"
     keyboard = [[InlineKeyboardButton(text='Launch the Game!', web_app=WebAppInfo(url=app_link))]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(welcome_msg, reply_markup=reply_markup, parse_mode='HTML')
