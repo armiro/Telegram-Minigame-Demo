@@ -201,8 +201,19 @@ body {
     position: absolute;
     color: #ffeaa7;
     background: transparent;
-    font-size: 3vh;
-    font-weight: bold;
+    font-size: 2.5vh;
+    font-weight: bolder;
+    text-shadow: 1px 1px 8px rgba(99, 110, 0, 0.5);
+}
+
+.num-box-display {
+    right: 18vw;
+    top: 3vh;
+    position: absolute;
+    color: #ffeaa7;
+    background: transparent;
+    font-size: 2.5vh;
+    font-weight: bolder;
     text-shadow: 1px 1px 8px rgba(99, 110, 0, 0.5);
 }
 
@@ -215,7 +226,7 @@ body {
 .boosters-box {
     width: 80vw;
     margin-bottom: 2vh;
-    padding: 1vh 0;
+    padding: 0.5vh 0;
     background-color: rgba(189, 195, 199, 0.3);
     border-radius: 2vw;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -224,7 +235,7 @@ body {
 
 .boosters-title {
     margin-bottom: 1vh;
-    font-size: 2.5vh;
+    font-size: 2vh;
     font-style: normal;
     font-weight: bold;
     color: rgba(255, 234, 167, 0.8);
@@ -245,13 +256,13 @@ body {
 
 .booster-text {
     text-align: left;
-    font-size: 2vh;
-    font-weight: bold;
+    font-size: 2.5vh;
+    font-weight: bolder;
 }
 
 .booster-cost {
     margin-left: auto;
-    padding: 1.25vh 0;
+    padding: 1.25vh 0.25vw;
     width: 12.5vw;
     height: 2.5vh;
     background-color: rgba(250, 177, 160, 1.0);
