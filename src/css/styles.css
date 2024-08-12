@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;  /* center vertically */
-    justify-content: center;  /* center horizontally */
+    justify-content: flex-start;  /* on top horizontally */
     height: 100vh;
     background: linear-gradient(to bottom right, #4b6cb7, #182848);
     background-size: cover;
@@ -90,10 +90,11 @@ body {
 
 /*** home page styles (present in index.html) ***/
 .coin-container {
-    display: grid;
     position: relative;
-    place-items: center;
-    top: -5vh;  /* place upper than center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* center horizontally */
+    top: 20vh;  /* place below counter */
     width: 70vw;  /* =756px in full hd screen */
     height: 40vh;  /* ~756px in full hd screen */
     background-color: transparent;
@@ -108,12 +109,10 @@ body {
 }
 
 .total-coins-container {
-    display: grid;
     position: relative;
-    place-items: center;  /* place items vertically & horizontally in the center */
     width: 50vw;
     height: 10vh;
-    top: -2vh;  /* ensure no overlap with coin container */
+    top: 25vh;  /* ensure no overlap with coin container */
     text-align: center;  /* center text within container */
     background-color: transparent;
 }
@@ -156,21 +155,21 @@ body {
 
 /*** referral page styles (present in referral.html) ***/
 .invite-box {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* center horizontally */
+    top: 20vh;
+    width: 60vw;
     background-color: rgba(189, 195, 199, 0.3);
-    padding: 3vh 3vw;
-    border-radius: 2vw;
+    padding: 0 5vw 5vh;
+    border-radius: 3vw;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 60vw;
 }
 
 .invite-heading {
     color: #ecf0f1;
-    font-size: 3vh;
 }
 
 .invite-text {
@@ -186,17 +185,19 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 2vh;
+    font-size: 1.75vh;
     font-weight: bold;
-    margin-top: 1vh;
+    margin-top: 2vh;
     cursor: pointer;
     border-radius: 0.4vw;
+    background-image: linear-gradient(45deg, #ffeaa7e5, #f4be5a);
 }
+
 
 
 /*** boosters page styles (present in boosters.html) ***/
 .balance-display {
-    left: 5vw;
+    left: 10vw;
     top: 3vh;
     position: absolute;
     color: #ffeaa7;
@@ -206,53 +207,59 @@ body {
     text-shadow: 1px 1px 8px rgba(99, 110, 0, 0.5);
 }
 
-.boosters-title {
-    position: absolute;
-    top: 0.5vh;
-    left: 5vw;
-    font-size: 2.5vh;
-    font-style: italic;
-    color: rgba(255, 234, 167, 0.7);
+.main-boosters-frame {
+    position: relative;
+    margin: 9vh 12vh;
+    background-color: transparent;
 }
 
 .boosters-box {
-    position: relative;
-    top: -10vh;
     width: 80vw;
-    min-height: 20vh;
-    margin: 0 0 2vh 0;
-    padding: 4vh 5vw;
+    margin-bottom: 2vh;
+    padding: 1vh 0;
     background-color: rgba(189, 195, 199, 0.3);
     border-radius: 2vw;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow-y: auto;  /* enable scrolling if content overflows */
 }
 
+.boosters-title {
+    margin-bottom: 1vh;
+    font-size: 2.5vh;
+    font-style: normal;
+    color: rgba(255, 234, 167, 0.7);
+    text-align: center;
+}
+
 .booster-container {
     display: flex;
-    margin: 1vh 0;
-    padding: 0.5vh 3vw;
-    align-items: center;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-bottom: 1vh;
+    padding: 1vh 4vw;
+    align-items: center;  /* center items vertically */
     background-color: rgba(255, 234, 167, 0.7);
     border-radius: 1vw;
-    text-align: left;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 2.5vh;
+}
+
+.booster-text {
+    text-align: left;
+    font-size: 2vh;
     font-weight: bold;
-    position: relative;
 }
 
 .booster-cost {
-    display: grid;
-    place-items: center;
-    padding: 1.5vh;
-    position: absolute;
-    right: 3vw;
+    margin-left: auto;
+    padding: 1.25vh 0;
+    width: 12.5vw;
+    height: 2.5vh;
     background-color: rgba(250, 177, 160, 1.0);
-    border-radius: 1vw;
+    border-radius: 2vw;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 2vh;
     font-weight: bolder;
+    text-align: center;
 }
 
 .disabled {
