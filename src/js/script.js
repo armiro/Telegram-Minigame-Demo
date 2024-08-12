@@ -44,7 +44,7 @@ import { updateBalance, getBalance } from "./utils.js";
         plusOneElement.style.position = 'absolute';
         plusOneElement.style.left = `${x}px`;
         plusOneElement.style.top = `${y}px`;
-        plusOneElement.style.fontSize = '32px';
+        plusOneElement.style.fontSize = '36px';
         plusOneElement.style.color = 'white';
         plusOneElement.style.zIndex = '1000';
         plusOneElement.style.pointerEvents = 'none';  // element doesn't interfere with other clicks
