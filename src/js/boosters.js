@@ -3,9 +3,14 @@ import { updateBalance } from "./utils.js";
 document.addEventListener('DOMContentLoaded', () => {
     const boosterContainers = document.querySelectorAll('.booster-container');
     const remainingBalance = document.querySelector('.balance-display .user-balance');
+    const numHuntedBoxes = document.querySelector('.num-box-display .num-user-boxes');
     const userID = window.sessionStorage.getItem('userID');
+
     let totalCoins = parseInt(window.sessionStorage.getItem('totalCoins'), 10) || 0;
     remainingBalance.textContent = totalCoins.toString();
+
+    let totalBoxes = parseInt(window.sessionStorage.getItem('totalBoxes'), 10) || 0;
+    numHuntedBoxes.textContent = totalBoxes.toString();
 
     boosterContainers.forEach(container => {
         const boosterCostElement = container.querySelector('.booster-cost');
