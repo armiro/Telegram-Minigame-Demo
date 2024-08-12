@@ -47,14 +47,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         welcome_msg = "Welcome to the mini-game crypto bot! Tap on funny Elon Musk to earn $MuskTap points!"
 
     referral_msg = f"Join me on playing MuskTap and receive {WELCOME_BONUS} coins as your welcome bonus!\n" \
-                    f"{os.getenv(key='BOT_LINK')}?start={generate_ref_code(guid)}"
+                   f"{os.getenv(key='BOT_LINK')}?start={generate_ref_code(guid)}"
     keyboard = [
-        [InlineKeyboardButton(text='Launch the Game!',
-                              web_app=WebAppInfo(url=os.getenv(key='APP_LINK')))],
-        [InlineKeyboardButton(text='Follow Us on X',
-                              url=os.getenv(key='X_PROFILE'))],
-        [InlineKeyboardButton(text=f'Invite & Earn {REF_BONUS} Points!',
-                              url=f'tg://msg?text={referral_msg}')]
+        [InlineKeyboardButton(text='Launch the Game!', web_app=WebAppInfo(url=os.getenv(key='APP_LINK')))],
+        [InlineKeyboardButton(text='Follow Us on X', url=os.getenv(key='X_PROFILE'))],
+        [InlineKeyboardButton(text=f'Invite & Earn {REF_BONUS} Points!', url=f'tg://msg?text={referral_msg}')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(welcome_msg, reply_markup=reply_markup, parse_mode='HTML')
