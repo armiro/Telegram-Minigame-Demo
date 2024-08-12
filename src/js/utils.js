@@ -43,7 +43,7 @@ export async function updateBalance(url, id, balance, speed) {
      * @throws {error} if server request fails
      */
     try {
-        const response = await fetch(`${url}/tap`, {
+        const response = await fetch(`${url}/update_balance`, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: new URLSearchParams({guid: id, balance: balance, speed: speed})

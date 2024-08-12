@@ -8,8 +8,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})  # enable cross-origin resource s
 users_collection = get_users_collection()
 
 
-@app.route('/tap', methods=['POST'])
-def tap():
+@app.route('/update_balance', methods=['POST'])
+def update_balance():
     user_id = request.form['guid']
     new_balance = int(request.form['balance'])
     speed = int(request.form['speed'])
