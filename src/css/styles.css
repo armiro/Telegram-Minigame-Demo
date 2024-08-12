@@ -160,7 +160,7 @@ body {
     flex-direction: column;
     align-items: center;  /* center horizontally */
     top: 20vh;
-    width: 60vw;
+    width: 65vw;
     background-color: rgba(189, 195, 199, 0.3);
     padding: 0 5vw 5vh;
     border-radius: 3vw;
@@ -174,7 +174,7 @@ body {
 
 .invite-text {
     color: #ecf0f1;
-    font-size: 2vh;
+    font-size: 2.5vh;
 }
 
 .invite-button {
@@ -185,7 +185,7 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1.5vh;
+    font-size: 2vh;
     font-weight: bold;
     margin-top: 2vh;
     cursor: pointer;
