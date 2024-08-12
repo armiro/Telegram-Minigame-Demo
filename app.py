@@ -1,10 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from mongodb_connection import users_collection
+from mongo_db import get_users_collection
 
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # enable cross-origin resource sharing
+users_collection = get_users_collection()
 
 
 @app.route('/tap', methods=['POST'])

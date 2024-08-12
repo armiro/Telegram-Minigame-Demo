@@ -5,8 +5,7 @@ from dotenv import load_dotenv
 
 from telegram.ext import Application, CommandHandler, ContextTypes
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
-# from pymongo import MongoClient
-from mongodb_connection import users_collection
+from mongo_db import get_users_collection
 
 
 REF_CODE_LENGTH = 10
@@ -16,6 +15,7 @@ REF_BONUS = 1500
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 load_dotenv('./variables.env')
+users_collection = get_users_collection()
 
 
 def generate_ref_code(guid, length=REF_CODE_LENGTH):
