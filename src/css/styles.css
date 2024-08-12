@@ -206,7 +206,7 @@ body {
     text-shadow: 1px 1px 8px rgba(99, 110, 0, 0.5);
 }
 
-.main-boosters-frame {
+.boosters-frame {
     position: relative;
     margin: 9vh 12vh;
     background-color: transparent;
@@ -226,7 +226,8 @@ body {
     margin-bottom: 1vh;
     font-size: 2.5vh;
     font-style: normal;
-    color: rgba(255, 234, 167, 0.7);
+    font-weight: bold;
+    color: rgba(255, 234, 167, 0.8);
     text-align: center;
 }
 
