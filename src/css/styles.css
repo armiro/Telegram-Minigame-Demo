@@ -178,19 +178,18 @@ body {
 }
 
 .invite-button {
-    background-color: rgba(255, 234, 167, 0.9);
+    background-image: linear-gradient(45deg, #ffeaa7e5, #f4be5a);
     color: rgba(0, 0, 0, 1.0);
     border: none;
-    padding: 1vh 2vw;
+    padding: 1.25vh 2.5vw;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1.75vh;
+    font-size: 1.5vh;
     font-weight: bold;
     margin-top: 2vh;
     cursor: pointer;
-    border-radius: 0.4vw;
-    background-image: linear-gradient(45deg, #ffeaa7e5, #f4be5a);
+    border-radius: 0.5vw;
 }
 
 
