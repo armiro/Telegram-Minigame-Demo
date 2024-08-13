@@ -6,8 +6,12 @@ function shareReferral() {
             title: 'MuskTap Referral',
             text: shareText
         })
-            .then(() => console.log('ref link was successfully shared!'))
-            .catch((error) => console.error('Error sharing:', error))
+            .then(() => console.log('referral link was successfully shared!'))
+            .catch((error) => console.error('Error sharing:', error));
+    } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareText)
+            .then(() => alert('Referral link copied to clipboard!'))
+            .catch((error) => console.error('error copying to clipboard:', error));
     } else {
         alert(shareText);  // show text in alert as fallback
     }
