@@ -244,10 +244,11 @@ body {
 
 .booster-container {
     display: flex;
+    gap: 2vw;
     margin-left: 5vw;
     margin-right: 5vw;
     margin-bottom: 1vh;
-    padding: 1vh 4vw;
+    padding: 0.75vh 4vw;
     align-items: center;  /* center items vertically */
     background-color: rgba(255, 234, 167, 0.7);
     border-radius: 1vw;
@@ -256,13 +257,13 @@ body {
 
 .booster-text {
     text-align: left;
-    font-size: 2.5vh;
+    font-size: 2vh;
     font-weight: bolder;
 }
 
 .booster-cost {
     margin-left: auto;
-    padding: 1.25vh 0.25vw;
+    padding: 1.5vh 0.25vw;
     width: 12.5vw;
     height: 2.5vh;
     background-color: rgba(250, 177, 160, 1.0);
