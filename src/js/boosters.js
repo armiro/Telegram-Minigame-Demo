@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             totalBoxes += maxBoxesToBuy;
         } else {
             alert('Not enough coins!');
+            return;  // stop execution if user's points is not sufficient
         }
 
         // update remaining coins & number of user boxes
