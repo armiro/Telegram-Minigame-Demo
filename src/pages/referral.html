@@ -7,6 +7,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="../css/styles.css">
 	<script src="https://telegram.org/js/telegram-web-app.js" defer></script>
+	<script src="../js/config.js" defer></script>
 	<script src="../js/referral.js" defer></script>
 	<script type="module">
         import { activateMenuItemEffect } from "../js/utils.js";
@@ -23,10 +24,10 @@
 			<h3>Invite friends to play together!</h3>
 		</div>
 		<div class="invite-text">
-			<p>For each invited player you will receive <b>1500</b> $MuskTap points, and also
+			<p>For each invited player you will receive <b><span class="ref-bonus"></span></b> $MuskTap points, and also
 			<b>10%</b> of their total received points everyday!</p>
 		</div>
-        <button class="invite-button" id="inviteButton">Invite & Earn 1500 Points</button>
+        <button class="invite-button" id="inviteButton">Invite & Earn <span class="ref-bonus"></span> Points</button>
     </div>
 	<div class="menu-bar">
 		<div class="menu-item" id="wallet" style="--mask-url: none" onclick="location.href='../../index.html'">

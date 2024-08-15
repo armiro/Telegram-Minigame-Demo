@@ -1,5 +1,5 @@
 function shareReferral() {
-    const shareText = `Join me on playing MuskTap and receive 250 coins as your welcome bonus!\n` +
+    const shareText = `Join me on playing MuskTap and receive ${WELCOME_BONUS} coins as your welcome bonus!\n` +
         `https://t.me/mustachio_bot?start=${window.sessionStorage.getItem('referralCode')}`;
     if (navigator.share) {
         navigator.share({
@@ -19,5 +19,8 @@ function shareReferral() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const inviteButton = document.querySelector('.invite-button');
+    document.querySelectorAll('.ref-bonus').forEach(e => {e.textContent = REF_BONUS.toString()});
+
     inviteButton.addEventListener('click', shareReferral)
+
 })
