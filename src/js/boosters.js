@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const buyMaxBoxButton = document.querySelector('#buyMaxBox');
     const buyMaxBoxCount = document.querySelector('.num-max-boxes');
 
-    const boxPrice = 20;
     const userID = window.sessionStorage.getItem('userID');
+    document.querySelector('.box-price').textContent = BOX_PRICE.toString();
 
     let totalCoins = parseInt(window.sessionStorage.getItem('totalCoins'), 10) || 0;
     remainingBalance.textContent = totalCoins.toString();
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     numHuntedBoxes.textContent = totalBoxes.toString();
 
     const updateMaxAvailBoxes = () => {
-        const maxAvailBoxes = Math.floor(totalCoins / boxPrice);
+        const maxAvailBoxes = Math.floor(totalCoins / BOX_PRICE);
         buyMaxBoxCount.textContent = maxAvailBoxes.toString();
     };
 
@@ -95,11 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const handleBoxPurchase = async (event) => {
         const maxBoxesToBuy = parseInt(buyMaxBoxCount.textContent);
 
-        if (event.target === buyOneBoxButton && totalCoins >= boxPrice) {
-            totalCoins -= boxPrice;
+        if (event.target === buyOneBoxButton && totalCoins >= BOX_PRICE) {
+            totalCoins -= BOX_PRICE;
             totalBoxes += 1;
         } else if (event.target === buyMaxBoxButton && maxBoxesToBuy > 0) {
-            totalCoins -= maxBoxesToBuy * boxPrice;
+            totalCoins -= maxBoxesToBuy * BOX_PRICE;
             totalBoxes += maxBoxesToBuy;
         } else {
             alert('Not enough coins!');
