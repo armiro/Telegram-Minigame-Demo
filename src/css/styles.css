@@ -207,7 +207,7 @@ body {
 }
 
 .num-box-display {
-    right: 18vw;
+    right: 14vw;
     top: 3vh;
     position: absolute;
     color: #ffeaa7;
@@ -294,8 +294,8 @@ body {
 
 .musk-box-container .booster-cost {
     width: 100%;
-    margin-left: 5vw;
-    margin-right: 5vw;
+    margin-left: 4vw;
+    margin-right: 4vw;
     padding: 1vh 0;
 }
 
