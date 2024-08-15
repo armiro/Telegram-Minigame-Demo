@@ -268,14 +268,40 @@ body {
     height: 2.5vh;
     background-color: rgba(250, 177, 160, 1.0);
     border-radius: 2vw;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.6);
     font-size: 2vh;
     font-weight: bolder;
     text-align: center;
 }
 
+.musk-box-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.musk-box-container .booster-text {
+    width: 100%;
+    text-align: center;
+}
+
+.musk-box-container .box-buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: inherit;
+}
+
+.musk-box-container .booster-cost {
+    width: 100%;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    padding: 1vh 0;
+}
+
 .disabled {
     background-color: rgba(204, 204, 204, 0.9);
     cursor: not-allowed;
-    pointer-events: none; /* prevent any interaction */
+    pointer-events: none;  /* prevent any interaction */
+    border: none;  /* remove border */
 }
