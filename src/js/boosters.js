@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             switch (questID) {
                 case 'followX':
                     if (questValueElement.textContent !== 'done') {
-                        window.open('https://twitter.com/musk_tap', '_blank');  // open twitter (X) link
+                        window.open('https://twitter.com/musk_tap', '_self');
                         setTimeout(async () => {
                             // notice the user about the earning
                             alert(`Quest completed! You earned ${questValue} points.`);
