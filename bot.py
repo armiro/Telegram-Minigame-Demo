@@ -1,6 +1,7 @@
 import logging
 import os
 import hashlib
+import random
 from dotenv import load_dotenv
 
 from telegram.ext import Application, CommandHandler, ContextTypes
@@ -21,6 +22,10 @@ users_collection = get_users_collection()
 def generate_ref_code(guid, length=REF_CODE_LENGTH):
     hashed_id = hashlib.sha256(guid.encode()).hexdigest()
     return hashed_id[:length]
+
+
+def generate_random_reward(min_val=0.5, max_val=30):
+    return round((max_val-min_val) * (random.uniform(0, 1) ** 2) + min_val, ndigits=1)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -44,10 +49,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if user:
         welcome_msg = f"Welcome back, {update.effective_user.username}! Continue earning $MuskTap points!"
     else:
-        welcome_msg = "Welcome to the mini-game crypto bot! Tap on funny Elon Musk to earn $MuskTap points!"
+        welcome_msg = f"Welcome to the mini-game crypto bot! Tap on funny Elon Musk to earn $MuskTap " \
+                      f"points.\n\n\U0001F4B0Congrats! You received <b>{generate_random_reward()} $MUSK</b> " \
+                      f"as your welcome giveaway!"
 
-    referral_msg = f"Join me on playing MuskTap and receive {WELCOME_BONUS} coins as your welcome bonus!\n" \
-                   f"{os.getenv(key='BOT_LINK')}?start={generate_ref_code(guid)}"
+    referral_msg = f"Join me on playing MuskTap and receive {WELCOME_BONUS} coins as your welcome " \
+                   f"bonus!\n\n{os.getenv(key='BOT_LINK')}?start={generate_ref_code(guid)}"
     keyboard = [
         [InlineKeyboardButton(text='Launch the Game!', web_app=WebAppInfo(url=os.getenv(key='APP_LINK')))],
         [InlineKeyboardButton(text='Follow Us on X', url=os.getenv(key='X_PROFILE'))],
