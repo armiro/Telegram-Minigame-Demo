@@ -9,3 +9,8 @@ A basic Tap-to-Earn (T2E) Telegram minigame, where users can complete quests or 
 Elon Musk coin to receive $Musktap points. Using points, they can buy boosters or purchase 
 surprise boxes, each containing random amount of $MUSK token. MuskTap is an airdrop platform, 
 similar to HamsterKombat or NotCoin.
+
+<p align="center" width="100%">
+  <img src="https://github.com/armiro/Telegram-Minigame-Demo/blob/main/assets/main_page_ui_collage.jpg" alt="Main Page UI Collage" width="700"/>
+  <img src="https://github.com/armiro/Telegram-Minigame-Demo/blob/main/assets/pages_ui_collage.jpg" alt="Pages UI Collage" width="700"/>
+</p>
