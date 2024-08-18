@@ -1,0 +1,42 @@
+/**
+ * @file styles.css
+ * @description This file is a preview of the styles for the MuskTap webapp UI, including layout, colors, and typography
+ *
+ * @author Arman H
+ * @contact arman.haghanifar@gmail.com
+ * @website https://armiro.github.io
+ * @linkedin https://linkedin.com/in/armanhgh
+ *
+ * @note Feel free to contact or open issue to learn more about the project, collaborate, or discuss source code pricing
+ *
+ * @repository https://github.com/armiro/Telegram-Minigame-Demo
+ */
+
+
+/*** common body & menu bar styles present in all pages ***/
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* center vertically */
+    justify-content: flex-start;  /* on top horizontally */
+    height: 100vh;
+    background: linear-gradient(to bottom right, #4b6cb7, #182848);
+    background-size: cover;
+    font-family: 'Ariel', sans-serif;
+    overflow: hidden;  /* disable scrolling */
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* background layer */
+}
+
+/*** main page styles (present in index.html) ***/
+/*** referral page styles (present in referral.html) ***/
+/*** boosters page styles (present in boosters.html) ***/
