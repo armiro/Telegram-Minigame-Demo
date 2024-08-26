@@ -8,6 +8,7 @@
 
   <a href="https://x.com/musk_tap">![Twitter](https://img.shields.io/badge/MuskTap-000000?&logo=x&logoColor=white)</a>
   <a href="https://t.me/musk_tap">![Telegram](https://img.shields.io/badge/MuskTap-2ca5e0?logo=telegram&logoColor=white)</a>
+  <a href="https://youtube.com/@musktap">![Youtube](https://img.shields.io/badge/MuskTap-ff0000?logo=youtube&color=red)</a>
 </div>
 
 
@@ -21,7 +22,7 @@ similar to HamsterKombat or NotCoin.
 - Open Telegram bot, you will receive random $MUSK tokens, a giveaway that might even worth **10$** 💰
 - Tap to earn $MuskTap points. They are used to improve profile or purchase items. 🥯
 - Buy boosters using your points. You can get more points by each tap, tap more, etc. ⚡
-- Purchase MUSK boxes. Boxes will be opened later, each including random amount of $MUSK (or other exciting things!) 🧰
+- Purchase MUSK boxes. Boxes will be opened later, each including random amount of $MUSK (or other exciting perks!) 🎁
 - Share your referral code with friends to earn more $MuskTap points 👥
 
 <p align="center" width="100%">
